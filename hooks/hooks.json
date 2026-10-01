@@ -1,0 +1,84 @@
+{
+  "description": "agent-forge guards: phase-gate, secret-guard, destructive-guard, paid-call-guard (PreToolUse) and typecheck-lint (PostToolUse).",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "${CLAUDE_PLUGIN_ROOT}/skills/agent-forge/scripts/hooks/hook.mjs",
+              "phase-gate"
+            ],
+            "timeout": 10,
+            "statusMessage": "agent-forge: phase gate"
+          },
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "${CLAUDE_PLUGIN_ROOT}/skills/agent-forge/scripts/hooks/hook.mjs",
+              "secret-guard"
+            ],
+            "timeout": 10,
+            "statusMessage": "agent-forge: secret scan"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "${CLAUDE_PLUGIN_ROOT}/skills/agent-forge/scripts/hooks/hook.mjs",
+              "destructive-guard"
+            ],
+            "timeout": 10,
+            "statusMessage": "agent-forge: destructive check"
+          },
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "${CLAUDE_PLUGIN_ROOT}/skills/agent-forge/scripts/hooks/hook.mjs",
+              "secret-guard"
+            ],
+            "timeout": 10,
+            "statusMessage": "agent-forge: secret scan"
+          },
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "${CLAUDE_PLUGIN_ROOT}/skills/agent-forge/scripts/hooks/hook.mjs",
+              "paid-call-guard"
+            ],
+            "timeout": 10,
+            "statusMessage": "agent-forge: paid-call check"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "${CLAUDE_PLUGIN_ROOT}/skills/agent-forge/scripts/hooks/hook.mjs",
+              "typecheck-lint"
+            ],
+            "timeout": 120,
+            "statusMessage": "agent-forge: tsc + biome"
+          }
+        ]
+      }
+    ]
+  }
+}

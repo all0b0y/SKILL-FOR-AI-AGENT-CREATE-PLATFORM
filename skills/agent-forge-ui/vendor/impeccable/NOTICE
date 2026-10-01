@@ -1,0 +1,5 @@
+This directory contains material from Impeccable (https://github.com/pbakaus/impeccable),
+Copyright Paul Bakaus and contributors, licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Modified by agent-forge (2026-10-01): copied reference/craft-floor.md and reference/operate.md only;
+removed sentences that refer to Impeccable's own SKILL.md, modes and design-detector hook.

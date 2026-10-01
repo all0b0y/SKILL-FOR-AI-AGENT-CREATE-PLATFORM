@@ -1,0 +1,21 @@
+{
+  "name": "agent-forge",
+  "displayName": "agent-forge",
+  "version": "0.1.0",
+  "description": "Interview-first workflow that builds a production AI-agent web app: grill \u2192 architect \u2192 build \u2192 evals \u2192 ui, each phase closed by a checkable gate.",
+  "author": {
+    "name": "all0b0y",
+    "url": "https://github.com/all0b0y"
+  },
+  "homepage": "https://github.com/all0b0y/SKILL-FOR-AI-AGENT-CREATE-PLATFORM",
+  "repository": "https://github.com/all0b0y/SKILL-FOR-AI-AGENT-CREATE-PLATFORM",
+  "license": "MIT",
+  "keywords": [
+    "agents",
+    "ai-sdk",
+    "nextjs",
+    "evals",
+    "grilling",
+    "skills"
+  ]
+}

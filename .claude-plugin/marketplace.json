@@ -1,0 +1,24 @@
+{
+  "name": "agent-forge-marketplace",
+  "owner": {
+    "name": "all0b0y",
+    "url": "https://github.com/all0b0y"
+  },
+  "description": "agent-forge: build production AI agents through a gated, interview-first process.",
+  "plugins": [
+    {
+      "name": "agent-forge",
+      "source": "./",
+      "description": "Interview-first workflow that builds a production AI-agent web app: grill \u2192 architect \u2192 build \u2192 evals \u2192 ui, each phase closed by a checkable gate.",
+      "category": "development",
+      "keywords": [
+        "agents",
+        "ai-sdk",
+        "nextjs",
+        "evals",
+        "grilling",
+        "skills"
+      ]
+    }
+  ]
+}

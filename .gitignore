@@ -1,0 +1,6 @@
+.research/upstream/
+node_modules/
+.DS_Store
+.agent-forge-tmp/
+skills/agent-forge/templates/app/node_modules/
+skills/agent-forge/templates/app/.next/
