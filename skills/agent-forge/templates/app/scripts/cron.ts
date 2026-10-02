@@ -1,6 +1,6 @@
 /** Operator-only schedule management. No schedules are installed on worker startup. */
 import { readFileSync } from 'node:fs';
-import { boss } from '../src/runs/queue';
+import { boss, ensureQueue } from '../src/runs/queue';
 import { SCHEDULE_QUEUE, ScheduleDefinition } from '../src/runs/schedule';
 
 const [command, value] = process.argv.slice(2);
@@ -8,7 +8,7 @@ if (!['put', 'remove', 'list'].includes(command ?? ''))
   throw new Error('Usage: pnpm cron put <json-file> | remove <name> | list');
 const queue = await boss();
 try {
-  await queue.createQueue(SCHEDULE_QUEUE);
+  await ensureQueue(queue, SCHEDULE_QUEUE);
   if (command === 'put') {
     if (!value) throw new Error('Schedule JSON file required');
     const { cron, timezone, ...task } = ScheduleDefinition.parse(JSON.parse(readFileSync(value, 'utf8')));

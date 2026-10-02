@@ -277,7 +277,7 @@
     "src/runs/queue.ts": {
       "spec": ["users", "autonomy"],
       "architecture": ["durability"],
-      "exports": ["RUN_QUEUE", "boss", "enqueueRun"]
+      "exports": ["RUN_QUEUE", "boss", "enqueueRun", "ensureQueue"]
     },
     "src/runs/schedule.ts": {
       "spec": ["users", "autonomy"],

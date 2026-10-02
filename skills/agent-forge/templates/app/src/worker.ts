@@ -4,11 +4,11 @@
  */
 import { executeRun } from './agent/run';
 import { db, pool } from './db/client';
-import { boss, enqueueRun, RUN_QUEUE } from './runs/queue';
+import { boss, enqueueRun, ensureQueue, RUN_QUEUE } from './runs/queue';
 import { dispatchScheduled, SCHEDULE_QUEUE } from './runs/schedule';
 
 const instance = await boss();
-await instance.createQueue(SCHEDULE_QUEUE);
+await ensureQueue(instance, SCHEDULE_QUEUE);
 await instance.work(SCHEDULE_QUEUE, async (jobs) => {
   for (const job of jobs) await dispatchScheduled(db, enqueueRun, job.id, job.data);
 });
