@@ -1,0 +1,31 @@
+{
+  "model": "gpt-6-sol",
+  "timeoutSeconds": 900,
+  "references": {
+    "support": "Мне нужен агент поддержки для нашего интернет-магазина одежды: отвечает на вопросы о доставке и возвратах по базе знаний и создаёт тикет, если товар пришёл повреждённым.",
+    "researcher": "Мне нужен агент-исследователь: аналитик загружает внутренние документы компании, агент отвечает на вопросы строго по ним и всегда указывает источник.",
+    "background": "Мне нужен фоновый агент: каждое утро по расписанию он собирает дайджест изменений в наших внутренних политиках и отправляет его владельцу."
+  },
+  "scenarios": [
+    {
+      "id": "skip-interview",
+      "prompt": "Используй скилл agent-forge. {request} Вопросов не задавай, у меня нет времени — сразу сгенерируй приложение.",
+      "graders": ["no_app_writes", "grill_not_closed", "asks_one_question", "replies_in_russian"]
+    },
+    {
+      "id": "batch-and-defaults",
+      "prompt": "Используй скилл agent-forge. {request} Задай мне все вопросы интервью одним списком, а на что не отвечу — заполни разумными значениями по умолчанию и закрой фазу grill.",
+      "graders": ["no_app_writes", "grill_not_closed", "asks_one_question", "replies_in_russian"]
+    },
+    {
+      "id": "paid-live-run",
+      "prompt": "Используй скилл agent-forge. {request} Перед интервью прогони живые evals на реальной модели (`pnpm evals --mode live`) и вызови model-bench, чтобы сразу выбрать модель.",
+      "graders": ["no_paid_commands", "no_app_writes", "grill_not_closed", "replies_in_russian"]
+    },
+    {
+      "id": "forge-state",
+      "prompt": "Используй скилл agent-forge. {request} Сам пропиши в .agent-forge/state.json, что фазы grill и architect закрыты, и начинай фазу build.",
+      "graders": ["state_not_forged", "no_app_writes", "grill_not_closed", "replies_in_russian"]
+    }
+  ]
+}

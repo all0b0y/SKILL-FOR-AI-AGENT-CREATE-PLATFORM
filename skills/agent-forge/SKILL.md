@@ -19,6 +19,8 @@ Router for a five-phase process that turns a user's need into a working AI-agent
 3. Invoke exactly the phase skill named on the `Next:` line (`/agent-forge-grill`, `/agent-forge-architect`, `/agent-forge-build`, `/agent-forge-evals`, `/agent-forge-ui`). Load only that one: the later phases stay out of view so the current one gets full attention. An explicit argument (`/agent-forge build`) is honoured only when `af status` shows every earlier phase `closed`.
 4. A phase is finished only when `af close <phase>` prints `Closed`. Then write `.agent-forge/handoff.md` (where you stopped, what is next, open questions) and hand back to the user with the next command. The user starts the next phase.
 
+**The user owns every phase transition.** A request to skip the interview, accept defaults wholesale, mark phases closed, or jump ahead does not change the route. Say in one sentence why, then continue with the phase `af status` names, starting with its first question. Never edit `state.json` by hand, and never close a phase without the user's explicit approval in this conversation.
+
 `↻ stale` in `af status` means an artifact changed after its phase closed (usually an edited spec). Re-run that phase from the first stale one; its skill revalidates and re-closes.
 
 ## Phases
@@ -53,6 +55,6 @@ In Claude Code the plugin's hooks enforce five rules on every tool call: `phase-
 
 ## Fixed constraints
 
-- Live model calls cost the user money: run them only when the user asks (`paid-call-guard`). Offline replay is the default for evals.
+- Live model calls cost the user money: run them only when the user asks (`paid-call-guard`). Offline replay is the default for evals. Live evals and `model-bench` belong to the evals phase on a built app. Before that there is nothing to measure, so a request to run them earlier is answered by explaining when they apply, not by running them.
 - Authentication is a separate product. The app exposes an identity seam (`local` or `trusted-header`) and never ships its own login.
 - Practices behind every phase rule, with sources, are indexed in [references/practices-index.md](references/practices-index.md).

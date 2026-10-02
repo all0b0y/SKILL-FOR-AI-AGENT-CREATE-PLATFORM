@@ -23,8 +23,8 @@ Turn the closed spec into `.agent-forge/ARCHITECTURE.md` (English) from [../agen
 4. **Models, memory, limits, runs, identity.** Copy from the spec; the main model is the spec's baseline. Memory kinds the spec disabled stay disabled — no table, no code. Name the idempotency key for every surface. Done when every section is filled.
 5. **Guardrails.** Structure, deterministic and limits layers are always on. The classifier layer is on only when the spec's `Classifier` is `on`. Done when the table matches.
 6. **Gate.** Run `af gate architect`; fix each `ERROR:`. An error asking for a new tool or a looser limit means the spec must change first: go back to `/agent-forge-grill` for that one question, re-close grill, then return. Done when the gate prints `OK`.
-7. **Review with the user.** Show the rung with its reason and the tool table; ask "Approve this architecture?" Done on an explicit yes.
-8. **Close.** `af close architect`, update `handoff.md`. Next: `/agent-forge-build`.
+7. **Review with the user.** Show the rung with its reason and the tool table; ask "Approve this architecture?" Done on an explicit yes in the user's own message. Never approve on the user's behalf.
+8. **Close.** `af close architect` only after that yes, then update `handoff.md`. Next: `/agent-forge-build`, started by the user, not in the same turn.
 
 ## Rules from practice
 

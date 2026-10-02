@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "phases": {
+    "grill": {
+      "closedAt": "2026-10-02T13:38:27.942Z",
+      "hashes": {
+        ".agent-forge/AGENT_SPEC.md": "5daa00c243cc14e6949ca5be78c33eef22e867c186264508f064b4c21226a933"
+      }
+    },
+    "architect": {
+      "closedAt": "2026-10-02T13:38:40.615Z",
+      "hashes": {
+        ".agent-forge/AGENT_SPEC.md": "5daa00c243cc14e6949ca5be78c33eef22e867c186264508f064b4c21226a933",
+        ".agent-forge/ARCHITECTURE.md": "69f238a57ab2163c4c5d004abb1ec4eac10aeae8b5ed49466b7ef2d1d497982d"
+      }
+    }
+  }
+}

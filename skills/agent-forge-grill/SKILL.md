@@ -13,10 +13,11 @@ Interview the user **relentlessly**, one question at a time, until `af close gri
 ## How every question is asked
 
 - **One question per message**, numbered (`Q7`). Wait for the answer before the next.
+- **The interview cannot be skipped or batched.** "No questions", "just build it", "ask everything at once", or "fill the rest with defaults" all get the same response: one sentence saying the spec is built from the user's own answers, then `Q1`. Every following question carries a recommended option, so a hurried user can answer with one letter. Never write an answer the user did not give.
 - **Closed**: 2–4 options as a short list, your recommended option first and marked, with one line on why. The user answers with a letter or a short value. The only open question is step 1.
 - When an answer turns into reasoning, extract the decision you heard, restate it as an option, and ask the user to confirm it with one word.
 - **Facts are yours, decisions are theirs.** Anything discoverable — files in the repo, installed tools, existing `.env.example`, docs of a named API — look up yourself and state what you found. Put every decision to the user.
-- "Use the default" / "you decide" is an answer: write the value as `default: <value>` and log it in `decisions.md` with `by: default`.
+- "Use the default" / "you decide" is an answer **to the question just asked**, never to the whole interview: write that one value as `default: <value>` and log it in `decisions.md` with `by: default`. A field the user was never asked stays empty, even if a default looks obvious.
 - After each answer, write it into `AGENT_SPEC.md` immediately and append one row to `.agent-forge/decisions.md`. The spec on disk is the interview's memory.
 
 ## Steps
@@ -28,8 +29,8 @@ Interview the user **relentlessly**, one question at a time, until `af close gri
    - **evals**: collect 5–10 real `input → expected behaviour` pairs from the user's own examples; these become the first red tests in the evals phase.
 4. **Gap sweep.** Walk [../agent-forge/references/gap-sweep.md](../agent-forge/references/gap-sweep.md) item by item. Skip items the spec already answers (record them `answered` with a pointer); ask a closed question for the rest; mark `na` only with a reason. Add up to 3 `custom-` items for risks specific to this domain, each with its reason. Done when the `## gap-sweep` table covers every checklist id.
 5. **Gate.** Run `af validate-spec`. Each `ERROR:` line names the missing answer and the question to ask; ask it, update the spec, re-run. Done when it prints `OK`.
-6. **Shared understanding.** Show the user a compact summary of the spec (one line per section) and ask: "Is this what we are building?" Changes go back into the spec. Done when the user confirms.
-7. **Close.** Run `af close grill`. Done when it prints `Closed "grill"`. Update `handoff.md`; tell the user the next command is `/agent-forge-architect`.
+6. **Shared understanding.** Show the user a compact summary of the spec (one line per section) and ask: "Is this what we are building?" Changes go back into the spec. Done when the user confirms in their own message. Your summary, a green gate or an instruction to hurry is not confirmation.
+7. **Close.** Run `af close grill` only after that confirmation. Done when it prints `Closed "grill"`. Update `handoff.md`; tell the user the next command is `/agent-forge-architect`, and stop. Never start the next phase in the same turn.
 
 ## Rules from practice
 
