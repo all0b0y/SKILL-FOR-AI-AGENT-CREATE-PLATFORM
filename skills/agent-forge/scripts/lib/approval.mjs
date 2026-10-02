@@ -173,6 +173,6 @@ export function checkPhaseShell(command, projectStatus, cwd = process.cwd()) {
   if (st && open.length === 0) return base;
   return {
     decision: 'deny',
-    reason: `phase-gate: copying the app template is the build phase, which is locked until the user has closed grill and architect${open.length ? ` ("${open[0].id}" is ${open[0].status})` : ' (run `af init` and the interview first)'}. Continue the interview instead.`,
+    reason: `phase-gate: copying the app template is the build phase, which is locked until the user has closed grill and architect${open.length ? ` ("${open[0].id}" is ${open[0].status})` : ' (run `af init` and the interview first)'}. Continue the interview instead: Reply to the user with the next interview question (one question, recommended option first).`,
   };
 }

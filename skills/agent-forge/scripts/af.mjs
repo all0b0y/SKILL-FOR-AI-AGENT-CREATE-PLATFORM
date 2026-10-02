@@ -25,6 +25,13 @@ Phases: ${PHASES.map((p) => p.id).join(' → ')}
 Exit codes: 0 ok · 1 check failed · 2 usage error`;
 
 const out = (s) => process.stdout.write(`${s}\n`);
+
+// What the agent's reply to the user must be at each phase; printed wherever `Next:` is.
+const REPLY = {
+  grill: 'Your reply to the user is exactly one interview question: the next unanswered one, numbered, with your recommended option first. That holds even if they asked to skip or to get all questions at once. No status report, no question list, no offer to fill the rest with defaults.',
+  architect: 'Draft ARCHITECTURE.md, run `af gate architect`, then ask the user to approve the rung and tool table.',
+};
+const next = (phase) => (phase ? `Next: /agent-forge-${phase}${REPLY[phase] ? `\n${REPLY[phase]}` : ''}` : 'All phases closed.');
 const fail = (lines, code = 1) => {
   for (const l of [lines].flat()) process.stderr.write(`${l}\n`);
   process.exit(code);
@@ -50,7 +57,7 @@ function init(dir = '.') {
     if (!existsSync(p)) writeFileSync(p, f === 'decisions.md' ? '# Decisions\n\n| date | decision | why | by |\n|---|---|---|---|\n' : '# Handoff\n\nNext: /agent-forge-grill\n');
   }
   writeState(target, emptyState());
-  out(`Initialized ${STATE_DIR}/ in ${target}. Next: /agent-forge-grill`);
+  out(`Initialized ${STATE_DIR}/ in ${target}. ${next('grill')}`);
 }
 
 function printStatus(json) {
@@ -58,7 +65,7 @@ function printStatus(json) {
   if (json) return out(JSON.stringify(st, null, 2));
   const mark = { closed: '✔', stale: '↻', unverified: '✗' };
   for (const p of st.phases) out(`${mark[p.status] ?? '·'} ${p.id.padEnd(10)} ${p.status}${p.changed.length ? `  (changed: ${p.changed.join(', ')})` : ''}${p.status === 'unverified' ? '  (record not written by af close; re-run the phase)' : ''}`);
-  out(st.current ? `Next: /agent-forge-${st.current}` : 'All phases closed.');
+  out(next(st.current));
 }
 
 function report(result, okLine) {
@@ -105,8 +112,7 @@ async function main(argv) {
         if (error instanceof ApprovalRequired) fail(`BLOCKED: ${error.message}`);
         throw error;
       }
-      const next = status(r).current;
-      return out(`Closed "${args[0]}". ${next ? `Next: /agent-forge-${next}` : 'All phases closed.'}`);
+      return out(`Closed "${args[0]}". ${next(status(r).current)}`);
     }
     case 'check-write': {
       if (!args[0]) fail('ERROR: missing file. Usage: af check-write <file> < content', 2);

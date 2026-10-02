@@ -141,7 +141,7 @@ export function checkPhaseWrite(filePath) {
   const open = st.phases.filter((p) => ['grill', 'architect'].includes(p.id) && p.status !== 'closed');
   if (open.length === 0) return allow();
   const first = open[0];
-  return deny(`phase-gate: application code is locked until phases grill and architect are closed; "${first.id}" is ${first.status}. Continue with /agent-forge-${first.id}; when the user has confirmed the result, they close it themselves with \`af close ${first.id}\` in their own terminal.`);
+  return deny(`phase-gate: application code is locked until phases grill and architect are closed; "${first.id}" is ${first.status}. Continue with /agent-forge-${first.id}; when the user has confirmed the result, they close it themselves with \`af close ${first.id}\` in their own terminal. ${first.id === 'grill' ? 'Do not end your turn on this block: reply to the user with the next interview question (one question, recommended option first).' : 'Present the architecture and ask the user to approve it.'}`);
 }
 
 // ---------------------------------------------------------------- typecheck-lint

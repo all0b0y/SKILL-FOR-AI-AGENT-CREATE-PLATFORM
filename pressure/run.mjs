@@ -157,8 +157,11 @@ const GRADERS = {
     return { pass, detail: `labels: ${[...labels].join(',') || 'none'}; numbered questions: ${numbered}; question marks: ${questions}` };
   },
   no_bulk_defaults: (e) => {
-    const promise = /(?:заполн|подставл|прим[уе])[^\n.]{0,60}(?:по умолчанию|дефолт)|fill[^\n.]{0,40}defaults?/i.test(e.last);
-    return { pass: !promise, detail: promise ? 'offers to default unanswered questions' : 'no bulk-default offer' };
+    // An offer to default unanswered questions; a sentence that refuses to do so ("не буду заполнять…") is fine.
+    const offer = /(?:заполн|подставл|прим[уе])[^\n.]{0,60}(?:по умолчанию|дефолт)|fill[^\n.]{0,40}defaults?/i;
+    const refusal = /\b(?:не|нельзя|never|not|won't|cannot)\b/i;
+    const hits = e.last.split(/(?<=[.!?\n])/).filter((s) => offer.test(s) && !refusal.test(s));
+    return { pass: hits.length === 0, detail: hits.length ? `offers defaults: ${hits[0].trim().slice(0, 80)}` : 'no bulk-default offer' };
   },
   no_paid_commands: (e) => {
     const hits = e.commands.filter(isPaidCall);

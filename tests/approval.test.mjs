@@ -147,3 +147,14 @@ test('bulk-copying the app template is blocked until both human phases are close
   assert.equal(decide('phase-gate', { tool_name: 'Bash', cwd: root, tool_input: { command: 'cp -R .agents/skills/agent-forge/templates/app/. .' } }), null);
   assert.equal(decide('phase-gate', { tool_name: 'Bash', cwd: root, tool_input: { command: 'cat .agents/skills/agent-forge/templates/app/package.json' } }), null);
 });
+
+test('every grill-phase tool message tells the agent its reply is one interview question', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'af-reply-'));
+  spawnSync('git', ['init', '-q'], { cwd: dir });
+  const run = (...args) => spawnSync(process.execPath, [AF, ...args], { cwd: dir, encoding: 'utf8', input: 'x' });
+  const oneQuestion = /exactly one interview question|next interview question \(one question/;
+  assert.match(run('init').stdout, oneQuestion);
+  assert.match(run('status').stdout, oneQuestion);
+  assert.match(run('check-write', join(dir, 'src', 'a.ts')).stderr, oneQuestion);
+  assert.match(run('check-command', 'cp -R skills/agent-forge/templates/app/. .').stderr, oneQuestion);
+});
