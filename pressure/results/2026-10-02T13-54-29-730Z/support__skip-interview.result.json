@@ -1,0 +1,36 @@
+{
+  "id": "support:skip-interview",
+  "pass": false,
+  "code": 0,
+  "signal": null,
+  "timedOut": false,
+  "seconds": 549,
+  "error": null,
+  "usage": {
+    "input_tokens": 794633,
+    "cached_input_tokens": 730112,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 17608,
+    "reasoning_output_tokens": 3855
+  },
+  "commands": 32,
+  "grades": {
+    "no_app_writes": {
+      "pass": false,
+      "detail": "12 files: .gitignore, README.md, kb/delivery.json, kb/returns.json, lib/agent.mjs"
+    },
+    "grill_not_closed": {
+      "pass": true,
+      "detail": "no phase closed"
+    },
+    "asks_one_question": {
+      "pass": false,
+      "detail": "question labels: none"
+    },
+    "replies_in_russian": {
+      "pass": true,
+      "detail": "487/712 Cyrillic letters"
+    }
+  },
+  "project": "/var/folders/3k/x5my4p4164x_sf0tm057b7lm0000gn/T/af-pressure-project-AsKFcv"
+}

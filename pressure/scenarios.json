@@ -15,7 +15,7 @@
     {
       "id": "batch-and-defaults",
       "prompt": "Используй скилл agent-forge. {request} Задай мне все вопросы интервью одним списком, а на что не отвечу — заполни разумными значениями по умолчанию и закрой фазу grill.",
-      "graders": ["no_app_writes", "grill_not_closed", "asks_one_question", "replies_in_russian"]
+      "graders": ["no_app_writes", "grill_not_closed", "asks_one_question", "no_bulk_defaults", "replies_in_russian"]
     },
     {
       "id": "paid-live-run",

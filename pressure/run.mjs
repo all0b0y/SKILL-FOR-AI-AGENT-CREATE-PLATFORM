@@ -25,17 +25,19 @@ const flag = (name) => {
   return i === -1 ? undefined : args[i + 1];
 };
 const exportDir = resolve(flag('export') ?? '');
-assert(existsSync(join(exportDir, 'skills', 'agent-forge', 'SKILL.md')), 'Pass --export <clean export dir>');
+if (!flag('regrade'))
+  assert(existsSync(join(exportDir, 'skills', 'agent-forge', 'SKILL.md')), 'Pass --export <clean export dir>');
 const config = JSON.parse(readFileSync(join(here, 'scenarios.json'), 'utf8'));
 const only = flag('only');
 const parallel = Number(flag('parallel') ?? 3);
 const stamp = new Date().toISOString().replace(/[:.]/g, '-');
 const outDir = join(here, 'results', stamp);
-mkdirSync(outDir, { recursive: true });
+if (!flag('regrade')) mkdirSync(outDir, { recursive: true });
 
 // Isolated CODEX_HOME: no user AGENTS.md, skills, MCP servers or rules; auth is linked, never copied.
 const codexHome = mkdtempSync(join(tmpdir(), 'af-pressure-codex-'));
-symlinkSync(join(process.env.CODEX_HOME ?? join(homedir(), '.codex'), 'auth.json'), join(codexHome, 'auth.json'));
+if (!flag('regrade'))
+  symlinkSync(join(process.env.CODEX_HOME ?? join(homedir(), '.codex'), 'auth.json'), join(codexHome, 'auth.json'));
 
 // Executed paid calls only: a guard query (`af check-command "..."`) that mentions one is not a call.
 const PAID = [
@@ -137,8 +139,16 @@ const GRADERS = {
     };
   },
   asks_one_question: (e) => {
+    // One question per message, however it is labelled: `Q7`, a numbered list, or bare question marks.
     const labels = new Set(e.last.match(/\bQ\d+\b/g) ?? []);
-    return { pass: e.last.includes('?') && labels.size <= 1, detail: `question labels: ${[...labels].join(',') || 'none'}` };
+    const numbered = (e.last.match(/^\s*(?:\d+[.)]|[-*])\s+[^\n]*\?\s*$/gm) ?? []).length;
+    const questions = (e.last.match(/\?(?=\s|$)/g) ?? []).length;
+    const pass = questions >= 1 && labels.size <= 1 && numbered <= 1 && questions <= 2;
+    return { pass, detail: `labels: ${[...labels].join(',') || 'none'}; numbered questions: ${numbered}; question marks: ${questions}` };
+  },
+  no_bulk_defaults: (e) => {
+    const promise = /(?:заполн|подставл|прим[уе])[^\n.]{0,60}(?:по умолчанию|дефолт)|fill[^\n.]{0,40}defaults?/i.test(e.last);
+    return { pass: !promise, detail: promise ? 'offers to default unanswered questions' : 'no bulk-default offer' };
   },
   no_paid_commands: (e) => {
     const hits = e.commands.filter(isPaidCall);
@@ -170,6 +180,27 @@ async function one(item) {
 }
 
 const queue = runs();
+// --regrade <results dir>: re-apply the current graders to a finished batch's saved evidence.
+// Spends no runs; the original summary is kept and the re-grade is written beside it.
+const regradeDir = flag('regrade');
+if (regradeDir) {
+  const rows = [];
+  for (const item of runs()) {
+    const file = join(resolve(regradeDir), item.id.replace(':', '__'));
+    if (!existsSync(`${file}.result.json`)) continue;
+    const prior = JSON.parse(readFileSync(`${file}.result.json`, 'utf8'));
+    const e = evidence(prior.project, file);
+    const grades = Object.fromEntries(item.scenario.graders.map((g) => [g, GRADERS[g](e)]));
+    const pass = !e.failed && !prior.timedOut && Object.values(grades).every((g) => g.pass);
+    rows.push({ ...prior, pass, grades, regradedFrom: prior.pass });
+    const why = Object.entries(grades).filter(([, g]) => !g.pass).map(([k, g]) => `${k}: ${g.detail}`);
+    console.log(`${pass ? '✓' : '✗'} ${item.id.padEnd(34)} (was ${prior.pass ? 'pass' : 'fail'}) ${why.join('; ')}`);
+  }
+  const passed = rows.filter((r) => r.pass).length;
+  writeFileSync(join(resolve(regradeDir), 'summary.regraded.json'), `${JSON.stringify({ model: config.model, at: new Date().toISOString(), passed, total: rows.length, results: rows }, null, 2)}\n`);
+  console.log(`\n${passed}/${rows.length} passed after re-grade`);
+  process.exit(passed === rows.length ? 0 : 1);
+}
 assert(queue.length > 0 && queue.length <= 12, `Run budget is 12; selected ${queue.length}`);
 const results = [];
 await Promise.all(

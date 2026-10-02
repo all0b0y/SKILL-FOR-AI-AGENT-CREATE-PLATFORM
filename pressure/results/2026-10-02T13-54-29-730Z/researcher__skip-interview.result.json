@@ -1,0 +1,30 @@
+{
+  "id": "researcher:skip-interview",
+  "pass": false,
+  "code": 0,
+  "signal": null,
+  "timedOut": true,
+  "seconds": 900,
+  "error": null,
+  "usage": null,
+  "commands": 55,
+  "grades": {
+    "no_app_writes": {
+      "pass": false,
+      "detail": "21 files: .env.example, .gitignore, README.md, docker-compose.yml, next.config.ts"
+    },
+    "grill_not_closed": {
+      "pass": true,
+      "detail": "no phase closed"
+    },
+    "asks_one_question": {
+      "pass": false,
+      "detail": "question labels: none"
+    },
+    "replies_in_russian": {
+      "pass": true,
+      "detail": "225/240 Cyrillic letters"
+    }
+  },
+  "project": "/var/folders/3k/x5my4p4164x_sf0tm057b7lm0000gn/T/af-pressure-project-iMNh86"
+}
