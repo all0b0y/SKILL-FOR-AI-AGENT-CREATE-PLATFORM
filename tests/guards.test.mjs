@@ -58,10 +58,10 @@ test('secret-guard allows env files, env lookups and local dev URLs', () => {
 
 // ------------------------------------------------------------------ paid-call-guard
 test('paid-call-guard asks before live model calls only', () => {
-  for (const cmd of ['pnpm evals:live', 'pnpm run eval:live --case x', 'node scripts/model-bench.mjs', 'claude plugin eval .', 'claude -p "hi"', 'curl https://api.anthropic.com/v1/messages']) {
+  for (const cmd of ['pnpm evals:live', 'pnpm run eval:live --case x', 'node scripts/model-bench.mjs', 'claude plugin eval .', 'claude -p "hi"', 'curl https://api.anthropic.com/v1/messages', 'pnpm evals:record', 'pnpm evals --mode live', 'pnpm evals --split dev --mode=record', 'pnpm retrieval:accept']) {
     assert.equal(checkPaid(cmd).decision, 'ask', cmd);
   }
-  for (const cmd of ['pnpm af:evals-gate', 'pnpm test', 'claude plugin eval init --bare first-case', 'pnpm evals']) {
+  for (const cmd of ['pnpm af:evals-gate', 'pnpm test', 'claude plugin eval init --bare first-case', 'pnpm evals', 'pnpm evals --mode replay']) {
     assert.equal(checkPaid(cmd).decision, 'allow', cmd);
   }
 });

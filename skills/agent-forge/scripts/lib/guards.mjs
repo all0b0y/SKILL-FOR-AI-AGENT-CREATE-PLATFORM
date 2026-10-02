@@ -98,6 +98,9 @@ export function checkDestructive(command) {
 
 const PAID = [
   /\b(?:pnpm|npm|yarn|bun)\s+(?:run\s+)?[\w:-]*(?:eval|bench)[\w-]*:live\b/,
+  /\b(?:pnpm|npm|yarn|bun)\s+(?:run\s+)?[\w:-]*evals?[\w-]*:record\b/,
+  /\b(?:pnpm|npm|yarn|bun)\s+(?:run\s+)?evals?\b.*--mode[=\s]+(?:live|record)\b/,
+  /\b(?:pnpm|npm|yarn|bun)\s+(?:run\s+)?retrieval:accept\b/,
   /\bmodel-bench\b/,
   /\bclaude\s+plugin\s+eval\b(?!\s+init\s+--bare)/,
   /\bclaude\s+(?:-p|--print)\b/,

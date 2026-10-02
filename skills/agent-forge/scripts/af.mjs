@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 // af — the agent-forge toolkit CLI. Every deterministic step of the process lives here.
 // Usage: node <skill-dir>/scripts/af.mjs <command> [args]
-import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 import { CHECKLIST, closePhase, runGate } from './lib/gates.mjs';
 import { checkDestructive, checkPaid, checkPhaseWrite, checkSecretCommand, checkSecretWrite } from './lib/guards.mjs';
 import { validateSpecFile } from './lib/spec.mjs';
@@ -126,6 +126,8 @@ async function main(argv) {
   }
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) await main(process.argv.slice(2));
+// Compare real paths: an installed skill is often reached through a symlink, and a mismatch
+// here would skip main() and exit 0, making every guard look like a pass.
+if (process.argv[1] && realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1])) await main(process.argv.slice(2));
 
 export { main };

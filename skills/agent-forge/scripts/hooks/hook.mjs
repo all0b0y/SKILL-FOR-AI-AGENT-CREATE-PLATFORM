@@ -3,7 +3,8 @@
 // lib/guards.mjs, prints hook JSON. Fast exit on the common no-op path keeps us well
 // inside the hook timeout (a timed-out PreToolUse hook fails open).
 import { spawnSync } from 'node:child_process';
-import { pathToFileURL } from 'node:url';
+import { realpathSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import {
   checkDestructive, checkPaid, checkPhaseWrite, checkSecretCommand, checkSecretWrite, typecheckTarget,
 } from '../lib/guards.mjs';
@@ -89,4 +90,6 @@ async function main() {
   if (out) process.stdout.write(JSON.stringify(out));
 }
 
-if (import.meta.url === pathToFileURL(process.argv[1]).href) main();
+// Compare real paths: an installed skill is often reached through a symlink, and a mismatch
+// here would skip main() and exit 0, making every guard look like a pass.
+if (process.argv[1] && realpathSync(fileURLToPath(import.meta.url)) === realpathSync(process.argv[1])) main();
