@@ -45,6 +45,19 @@ test('Runs lets the user reopen the exact saved conversation', async ({ page }) 
   await expect(page.getByRole('link', { name: 'Open conversation', exact: true })).toBeVisible();
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
   await expect(page.getByRole('list', { name: 'Timeline' })).not.toContainText('+-');
+  // Offset and duration must be distinguishable, and columns must align across rows.
+  const rows = page.getByRole('list', { name: 'Timeline' }).getByRole('listitem');
+  await expect(rows.first()).toContainText(/started \+\d+ ms/);
+  await expect(rows.first()).toContainText(/took \d+ ms/);
+  const columns = await rows.evaluateAll((items) =>
+    items.map((item) =>
+      [...item.querySelectorAll('[data-column]')].map((cell) =>
+        Math.round(cell.getBoundingClientRect().left),
+      ),
+    ),
+  );
+  expect(columns.length).toBeGreaterThan(1);
+  for (const row of columns) expect(row).toEqual(columns[0]);
   await page.screenshot({ path: screenshotPath('run-detail.png'), fullPage: true });
   await page.getByRole('link', { name: 'Open conversation', exact: true }).click();
   await expect(page).toHaveURL(`/?conversation=${conversationId}`);
@@ -62,6 +75,8 @@ test('pending approval fits a narrow view with 200% text', async ({ page }) => {
   await page.getByRole('button', { name: 'Send', exact: true }).click();
   await expect(page.getByRole('alertdialog')).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(320);
+  // Axe must see settled colors, not a frame of the entrance fade.
+  await expect(page.getByRole('alertdialog')).toHaveCSS('opacity', '1');
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
   await page.getByRole('button', { name: 'Reject', exact: true }).click();
   await expect(page.getByRole('alertdialog')).toBeHidden();

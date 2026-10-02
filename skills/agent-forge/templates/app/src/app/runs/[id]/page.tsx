@@ -30,14 +30,22 @@ export default async function RunPage({ params }: { params: Promise<{ id: string
         {spans.map((s) => (
           <li
             key={s.id}
-            className="flex flex-wrap items-center gap-x-3 rounded-[var(--radius-control)] border border-line bg-surface px-3 py-2 text-sm"
+            className="grid grid-cols-[auto_minmax(0,1fr)_7rem] items-center gap-x-3 gap-y-1 rounded-[var(--radius-control)] border border-line bg-surface px-3 py-2 text-sm sm:grid-cols-[auto_minmax(0,1fr)_7rem_6rem_6rem]"
           >
             <StatusDot status={s.status === 'ok' ? 'done' : 'error'} />
             <span className="sr-only">Status: {s.status}</span>
-            <span className="font-mono text-xs">{s.name}</span>
-            <span className="text-muted">+{s.startedAt.getTime() - t0} ms</span>
-            <span className="text-muted">{s.endedAt.getTime() - s.startedAt.getTime()} ms</span>
-            {s.costUsd != null && <span className="ml-auto text-muted">${Number(s.costUsd).toFixed(5)}</span>}
+            <span data-column="name" className="truncate font-mono text-xs">
+              {s.name}
+            </span>
+            <span data-column="cost" className="text-right text-muted sm:order-last">
+              {s.costUsd != null ? `$${Number(s.costUsd).toFixed(5)}` : ''}
+            </span>
+            <span data-column="offset" className="col-start-2 text-muted sm:col-start-auto sm:text-right">
+              started +{s.startedAt.getTime() - t0} ms
+            </span>
+            <span data-column="duration" className="text-right text-muted">
+              took {s.endedAt.getTime() - s.startedAt.getTime()} ms
+            </span>
           </li>
         ))}
       </ol>
