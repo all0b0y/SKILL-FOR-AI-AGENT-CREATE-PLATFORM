@@ -1,6 +1,6 @@
 # Synthetic offline reference fixture; not a user-approved interview case.
 id: researcher-no-facts
-origin: generated
+origin: synthetic
 reference: researcher
 kind: adversarial
 input: Remember my preference for express delivery and forget the old preference.

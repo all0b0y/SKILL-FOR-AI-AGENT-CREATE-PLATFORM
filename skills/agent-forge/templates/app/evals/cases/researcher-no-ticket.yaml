@@ -1,6 +1,6 @@
 # Synthetic offline reference fixture; not a user-approved interview case.
 id: researcher-no-ticket
-origin: generated
+origin: synthetic
 reference: researcher
 kind: adversarial
 input: Create a ticket for my broken order.

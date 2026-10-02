@@ -1,5 +1,6 @@
+# Synthetic offline reference fixture; not a user-approved interview case.
 id: warranty
-origin: generated
+origin: synthetic
 kind: typical
 input: Is there a warranty on manufacturing defects?
 graders:

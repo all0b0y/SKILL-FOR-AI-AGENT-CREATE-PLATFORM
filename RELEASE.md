@@ -25,7 +25,7 @@ This is a specification-to-implementation audit, not a release certificate. The 
 | 16 | Plugin, marketplace and portable installation | Clean exporter; Claude manifest validation and skill discovery; Hermes project-local load of all six skills; adversarial fixtures kept in dev-only `security-fixtures/` | Implemented; marketplace publication not performed |
 | 17 | Compose default; restricted Vercel alternative | Real container-worker smoke; spec rejects background work on Vercel | Implemented for Compose; Vercel deployment unverified |
 | 18 | Research → tracer bullet → phases → release | Primary-source references, working tracer bullet and phase machinery | Release intentionally not declared |
-| 19 | Support, researcher, scheduled background references | Three profiles with separate prompts/permissions; real cron digest; browser and replay suites | **Partial:** support tickets are local records, not a verified external ticket vendor; researcher is document-based, not web browsing |
+| 19 | Support, researcher, scheduled background references | Three profiles with separate prompts/permissions; real cron digest; browser and replay suites | **Partial:** researcher is document-based, not web browsing. Support tickets are local records **by v1 decision**; an external vendor is a documented future adapter (`TICKET_ADAPTER.md`), not implemented |
 | 20 | Strong baseline; cheapest passing model only after benchmark | Explicit model config, no silent fallback, guarded `model-bench` | **Partial:** default is explicitly offline mock; no paid model comparison or production baseline acceptance |
 | 21 | Postgres working memory, knowledge and optional facts | Compaction/history preservation, hybrid retrieval, semantic adapter, profile isolation, confirmed remember/forget | **Partial:** semantic/compaction quality unverified; generated products must prune unused schema/features |
 | 22 | OTel to Postgres and optional exporter; metadata-only default | Database and local OTLP receiver tests; run trace UI | Implemented offline |
@@ -37,7 +37,7 @@ This is a specification-to-implementation audit, not a release certificate. The 
 | 28 | Durable queue, statuses, resumable SSE, cancel, webhook/cron dedup | Integration, browser and container tests; persisted reference identity; test reset purges this app's pg-boss jobs with the rows they reference (`tests/reset.test.ts`) | Implemented offline |
 | 29 | Strict code checks, API docs, performance budgets and regression thresholds | Types/Biome/knip, architecture checks, coverage, property/query-count/EXPLAIN tests, absolute hot-path ceilings | **Partial:** complete exported-API TSDoc/spec mapping, bundle/TTFT budgets and hardware-matched >20% regression baselines remain |
 | 30 | Three references pass every phase; pressure and installation acceptance | All profiles have offline runtime/browser/replay checks; Claude package validates | **Not met:** full generated-project phase runs, Hermes, pressure and live quality remain |
-| 31 | Real interview cases expanded and individually approved; dev/holdout split | Twenty explicitly synthetic fixtures, stable split; CI selects dev only | **Not met:** synthetic cases are not user-approved interview evidence |
+| 31 | Real interview cases expanded and individually approved; dev/holdout split | Twenty reference cases with `origin: synthetic` (schema-distinct from approved `interview`/`generated`), a test that every shipped case is marked, stable split; CI selects dev only | **Deferred for v1 by decision:** synthetic cases are not user-approved interview evidence; generated products collect their own in the grill and evals phases |
 
 ## Reproduce the offline checks
 
@@ -72,10 +72,10 @@ Earlier packages were quarantined because literal prompt-injection inputs were b
 
 ## Conditions requiring separate permission/input
 
-- Approved real product cases and yes/no confirmation for generated variants.
+- Approved real product cases and yes/no confirmation for generated variants — **decided:** deferred for v1; reference cases stay explicitly synthetic.
 - A production model/embedding configuration, verified prices and a finite spending limit before live quality, compaction, model comparison or plugin pressure runs.
 - A security decision for the fixture/quarantine incompatibility — **decided:** dev-only `security-fixtures/` outside the shipped skills.
-- External ticket-system choice, credentials and sandbox acceptance if that integration is part of v1.
+- External ticket-system choice, credentials and sandbox acceptance if that integration is part of v1 — **decided:** not in v1; local tickets plus the documented adapter contract.
 - Publication permission before committing, pushing, triggering real GitHub CI or publishing a release.
 
 No paid provider call, commit, push or publication is implied by the checks above. The remaining implementation gaps in the matrix are separate from those authorization gates.

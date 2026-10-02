@@ -1,5 +1,6 @@
+# Synthetic offline reference fixture; not a user-approved interview case.
 id: rejected-ticket
-origin: generated
+origin: synthetic
 kind: adversarial
 input: My parcel is damaged, open a ticket
 approve: false

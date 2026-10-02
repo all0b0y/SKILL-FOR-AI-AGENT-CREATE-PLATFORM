@@ -1,5 +1,6 @@
+# Synthetic offline reference fixture; not a user-approved interview case.
 id: unknown
-origin: generated
+origin: synthetic
 kind: edge
 input: Can I pay with bitcoin?
 graders:

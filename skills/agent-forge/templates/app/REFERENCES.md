@@ -4,7 +4,7 @@ The template includes three explicit **reference profiles**, not a claim that ev
 
 | Reference | Product/job | Capabilities | Deliberate omissions |
 |---|---|---|---|
-| `support` | Answer policies and create a confirmed support ticket | KB lookup, confirmed ticket creation, confirmed remembering/forgetting | No external ticket vendor or account system |
+| `support` | Answer policies and create a confirmed support ticket | KB lookup, confirmed ticket creation, confirmed remembering/forgetting | No external ticket vendor or account system: tickets are local rows; see [TICKET_ADAPTER.md](TICKET_ADAPTER.md) for the future vendor contract |
 | `researcher` | Compare the supplied documents and cite source passages | Read-only hybrid KB lookup, source comparison, uncertainty/abstention | No live web browser, external search, support writes, durable user facts or MCP |
 | `background` | Produce a scheduled evidence digest from that corpus | The same read-only source access, durable pg-boss scheduling, stored results and SSE inspection | No email/message delivery, support writes, user-fact access or MCP |
 

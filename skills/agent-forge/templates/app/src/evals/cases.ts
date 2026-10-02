@@ -34,7 +34,8 @@ const Grader = z.discriminatedUnion('type', [
 /** Validate an individual eval case, explicit origin/profile, bounded repetitions and deterministic or rubric-based graders. */
 export const Case = z.object({
   id: z.string().regex(/^[a-z0-9-]+$/),
-  origin: z.enum(['interview', 'generated']),
+  /** `interview`/`generated` are user-approved evidence; `synthetic` marks shipped reference fixtures that never are. */
+  origin: z.enum(['interview', 'generated', 'synthetic']),
   reference: z.enum(['support', 'researcher', 'background']).optional(),
   kind: z.enum(['typical', 'edge', 'adversarial']).default('typical'),
   input: z.string().min(1),

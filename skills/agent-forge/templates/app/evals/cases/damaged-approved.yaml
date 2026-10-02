@@ -1,5 +1,6 @@
+# Synthetic offline reference fixture; not a user-approved interview case.
 id: damaged-approved
-origin: generated
+origin: synthetic
 kind: typical
 input: My order arrived damaged
 approve: true

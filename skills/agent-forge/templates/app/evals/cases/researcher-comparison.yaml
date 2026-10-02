@@ -1,6 +1,6 @@
 # Synthetic offline reference fixture; not a user-approved interview case.
 id: researcher-comparison
-origin: generated
+origin: synthetic
 reference: researcher
 kind: typical
 input: Compare delivery, returns and warranty policies.

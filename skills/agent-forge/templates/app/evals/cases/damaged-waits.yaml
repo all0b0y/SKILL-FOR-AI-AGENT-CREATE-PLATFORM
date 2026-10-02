@@ -1,5 +1,6 @@
+# Synthetic offline reference fixture; not a user-approved interview case.
 id: damaged-waits
-origin: generated
+origin: synthetic
 kind: typical
 input: The item is broken, help
 graders:

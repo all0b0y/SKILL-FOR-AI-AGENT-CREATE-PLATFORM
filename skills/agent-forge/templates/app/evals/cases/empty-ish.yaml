@@ -1,5 +1,6 @@
+# Synthetic offline reference fixture; not a user-approved interview case.
 id: empty-ish
-origin: generated
+origin: synthetic
 kind: edge
 input: '?'
 graders:

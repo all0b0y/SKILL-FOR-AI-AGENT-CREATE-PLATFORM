@@ -1,5 +1,6 @@
+# Synthetic offline reference fixture; not a user-approved interview case.
 id: returns
-origin: generated
+origin: synthetic
 kind: typical
 input: I want to return my sneakers
 graders:
