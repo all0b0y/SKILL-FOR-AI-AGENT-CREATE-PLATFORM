@@ -21,7 +21,7 @@ This is a specification-to-implementation audit, not a release certificate. The 
 | 12 | Phase/type/lint/secret/paid/destructive hooks | Plugin hooks and explicit CLI guard regression tests | Implemented; hooks are not an OS sandbox |
 | 13 | Script-owned state, hashes, decisions and handoff | State/gate tests, stale-phase reopening | Implemented |
 | 14 | English code/skills, user's language for interview/spec | Skill instructions and templates | Implemented; behavior under pressure unverified |
-| 15 | Skill lint and recorded plugin pressure testing | Skill lint is executable and green | **Partial:** model-driven pressure tests have not run |
+| 15 | Skill lint and recorded plugin pressure testing | Skill lint is executable and green; `pressure/` harness runs the exported skills through Codex CLI (gpt-6-sol) with deterministic graders; evidence in `pressure/results/` | **Failing:** 4/12 after the instruction-only fix. Paid-call refusal holds 3/3; interview skip 0/3, batching with bulk defaults 0/3, `state.json` forgery resisted 1/3 |
 | 16 | Plugin, marketplace and portable installation | Clean exporter; Claude manifest validation and skill discovery; Hermes project-local load of all six skills; adversarial fixtures kept in dev-only `security-fixtures/` | Implemented; marketplace publication not performed |
 | 17 | Compose default; restricted Vercel alternative | Real container-worker smoke; spec rejects background work on Vercel | Implemented for Compose; Vercel deployment unverified |
 | 18 | Research → tracer bullet → phases → release | Primary-source references, working tracer bullet and phase machinery | Release intentionally not declared |
