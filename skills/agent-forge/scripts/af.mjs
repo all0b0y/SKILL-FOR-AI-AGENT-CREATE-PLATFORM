@@ -4,6 +4,7 @@
 import { copyFileSync, existsSync, mkdirSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { ApprovalRequired, checkPhaseCommand } from './lib/approval.mjs';
 import { CHECKLIST, closePhase, runGate } from './lib/gates.mjs';
 import { checkDestructive, checkPaid, checkPhaseWrite, checkSecretCommand, checkSecretWrite } from './lib/guards.mjs';
 import { validateSpecFile } from './lib/spec.mjs';
@@ -55,7 +56,8 @@ function init(dir = '.') {
 function printStatus(json) {
   const st = status(root());
   if (json) return out(JSON.stringify(st, null, 2));
-  for (const p of st.phases) out(`${p.status === 'closed' ? '✔' : p.status === 'stale' ? '↻' : '·'} ${p.id.padEnd(10)} ${p.status}${p.changed.length ? `  (changed: ${p.changed.join(', ')})` : ''}`);
+  const mark = { closed: '✔', stale: '↻', unverified: '✗' };
+  for (const p of st.phases) out(`${mark[p.status] ?? '·'} ${p.id.padEnd(10)} ${p.status}${p.changed.length ? `  (changed: ${p.changed.join(', ')})` : ''}${p.status === 'unverified' ? '  (record not written by af close; re-run the phase)' : ''}`);
   out(st.current ? `Next: /agent-forge-${st.current}` : 'All phases closed.');
 }
 
@@ -97,7 +99,12 @@ async function main(argv) {
       const r = root();
       const res = closePhase(r, args[0]);
       if (!res.ok) fail(res.errors);
-      markClosed(r, args[0]);
+      try {
+        markClosed(r, args[0], new Date(), { summary: `Gate "${args[0]}" is green in ${r}.` });
+      } catch (error) {
+        if (error instanceof ApprovalRequired) fail(`BLOCKED: ${error.message}`);
+        throw error;
+      }
       const next = status(r).current;
       return out(`Closed "${args[0]}". ${next ? `Next: /agent-forge-${next}` : 'All phases closed.'}`);
     }
@@ -111,7 +118,7 @@ async function main(argv) {
     case 'check-command': {
       const command = args.join(' ');
       if (!command) fail('ERROR: missing command. Usage: af check-command "<shell command>"', 2);
-      for (const check of [checkDestructive, checkSecretCommand, checkPaid]) {
+      for (const check of [checkPhaseCommand, checkDestructive, checkSecretCommand, checkPaid]) {
         const v = check(command);
         if (v.decision !== 'allow') return verdictExit(v);
       }

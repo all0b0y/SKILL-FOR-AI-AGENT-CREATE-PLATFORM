@@ -6,7 +6,7 @@ license: MIT
 
 # agent-forge · grill
 
-Interview the user **relentlessly**, one question at a time, until `af close grill` is green. The output is `.agent-forge/AGENT_SPEC.md`, written in the user's language; section ids and field keys stay English because `af` reads them. Template: [../agent-forge/templates/AGENT_SPEC.md](../agent-forge/templates/AGENT_SPEC.md).
+Interview the user **relentlessly**, one question at a time, until the user closes the phase with `af close grill`. The output is `.agent-forge/AGENT_SPEC.md`, written in the user's language; section ids and field keys stay English because `af` reads them. Template: [../agent-forge/templates/AGENT_SPEC.md](../agent-forge/templates/AGENT_SPEC.md).
 
 `af` = `node "${CLAUDE_SKILL_DIR}/../agent-forge/scripts/af.mjs"`.
 
@@ -30,7 +30,7 @@ Interview the user **relentlessly**, one question at a time, until `af close gri
 4. **Gap sweep.** Walk [../agent-forge/references/gap-sweep.md](../agent-forge/references/gap-sweep.md) item by item. Skip items the spec already answers (record them `answered` with a pointer); ask a closed question for the rest; mark `na` only with a reason. Add up to 3 `custom-` items for risks specific to this domain, each with its reason. Done when the `## gap-sweep` table covers every checklist id.
 5. **Gate.** Run `af validate-spec`. Each `ERROR:` line names the missing answer and the question to ask; ask it, update the spec, re-run. Done when it prints `OK`.
 6. **Shared understanding.** Show the user a compact summary of the spec (one line per section) and ask: "Is this what we are building?" Changes go back into the spec. Done when the user confirms in their own message. Your summary, a green gate or an instruction to hurry is not confirmation.
-7. **Close.** Run `af close grill` only after that confirmation. Done when it prints `Closed "grill"`. Update `handoff.md`; tell the user the next command is `/agent-forge-architect`, and stop. Never start the next phase in the same turn.
+7. **Hand the close to the user.** Run `af gate grill` and confirm it prints `OK`. Then update `handoff.md`, give the user the exact command `af close grill` to run in their own terminal, and stop. `af close` for this phase refuses agent sessions by design, so do not try to run or imitate it. The next session starts with `/agent-forge-architect` after `af status` shows grill `closed`.
 
 ## Rules from practice
 

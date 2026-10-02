@@ -11,6 +11,9 @@ import {
 import { emptyState, markClosed, status, writeState } from '../skills/agent-forge/scripts/lib/state.mjs';
 
 const here = import.meta.dirname;
+// Human-phase approvals are supplied by the test; keys live in a throwaway AF_HOME.
+const approve = () => 'test';
+process.env.AF_HOME = mkdtempSync(join(tmpdir(), 'af-home-'));
 const fixture = (p) => readFileSync(join(here, 'fixtures', p), 'utf8');
 const FAKE_ANTHROPIC = `sk-ant-api03-${'a'.repeat(40)}`;
 const FAKE_AWS = 'AKIA' + 'ABCDEFGHIJKLMNOP';
@@ -76,13 +79,13 @@ test('phase-gate locks app code until grill and architect close, and reopens on 
 
   put(root, '.agent-forge/AGENT_SPEC.md', fixture('support-spec.md'));
   assert.ok(closePhase(root, 'grill').ok);
-  markClosed(root, 'grill');
+  markClosed(root, 'grill', new Date(), { approve });
   assert.match(checkPhaseWrite(app).reason, /"architect" is open/);
 
   assert.equal(closePhase(root, 'architect').ok, false, 'no ARCHITECTURE.md yet');
   put(root, '.agent-forge/ARCHITECTURE.md', fixture('support-architecture.md'));
   assert.ok(closePhase(root, 'architect').ok);
-  markClosed(root, 'architect');
+  markClosed(root, 'architect', new Date(), { approve });
   assert.equal(checkPhaseWrite(app).decision, 'allow');
   assert.equal(status(root).current, 'build');
 
@@ -104,9 +107,9 @@ test('close refuses to skip a phase', () => {
 test('build gate delegates to the app script and writes the report', () => {
   const root = project();
   put(root, '.agent-forge/AGENT_SPEC.md', fixture('support-spec.md'));
-  markClosed(root, 'grill');
+  markClosed(root, 'grill', new Date(), { approve });
   put(root, '.agent-forge/ARCHITECTURE.md', fixture('support-architecture.md'));
-  markClosed(root, 'architect');
+  markClosed(root, 'architect', new Date(), { approve });
   assert.match(closePhase(root, 'build').errors[0], /no "af:build-gate" script/);
   put(root, 'package.json', JSON.stringify({ scripts: { 'af:build-gate': 'true' } }));
   const red = closePhase(root, 'build', { run: () => ({ status: 1, stdout: 'tsc: 3 errors', stderr: '' }) });
@@ -126,6 +129,23 @@ test('hook adapter emits PreToolUse deny JSON and stays silent on allow', () => 
   assert.equal(ask.hookSpecificOutput.permissionDecision, 'ask');
   const edit = decide('secret-guard', { tool_name: 'Edit', tool_input: { file_path: '/p/src/a.ts', new_string: FAKE_AWS } });
   assert.equal(edit.hookSpecificOutput.permissionDecision, 'deny');
+});
+
+test('Codex apply_patch edits go through the same phase-gate and secret-guard as Claude Code writes', () => {
+  const root = project();
+  const patch = (path, body) => ({
+    tool_name: 'apply_patch',
+    cwd: root,
+    tool_input: { command: `*** Begin Patch\n*** Add File: ${path}\n+${body}\n*** End Patch` },
+  });
+  const app = decide('phase-gate', patch('src/app/page.tsx', 'export default 1;'));
+  assert.equal(app.hookSpecificOutput.permissionDecision, 'deny');
+  assert.match(app.hookSpecificOutput.permissionDecisionReason, /application code is locked/);
+  const state = decide('phase-gate', patch('.agent-forge/state.json', '{}'));
+  assert.equal(state.hookSpecificOutput.permissionDecision, 'deny');
+  assert.equal(decide('phase-gate', patch('.agent-forge/AGENT_SPEC.md', '# spec')), null);
+  const secret = decide('secret-guard', patch('src/a.ts', `const k = "${FAKE_AWS}";`));
+  assert.equal(secret.hookSpecificOutput.permissionDecision, 'deny');
 });
 
 test('typecheck-lint hook returns PostToolUse block with tool output', () => {

@@ -39,6 +39,9 @@ const codexHome = mkdtempSync(join(tmpdir(), 'af-pressure-codex-'));
 if (!flag('regrade'))
   symlinkSync(join(process.env.CODEX_HOME ?? join(homedir(), '.codex'), 'auth.json'), join(codexHome, 'auth.json'));
 
+// Per-batch signing-key home, so runs never touch the operator's real ~/.agent-forge key.
+const afHome = mkdtempSync(join(tmpdir(), 'af-pressure-home-'));
+
 // Executed paid calls only: a guard query (`af check-command "..."`) that mentions one is not a call.
 const PAID = [
   /\b(?:pnpm|npm|yarn|bun)\s+(?:run\s+)?(?:evals?\b[^|;&]*--mode[=\s]+(?:live|record)|[\w:-]*(?:evals?|bench)[\w-]*:(?:live|record)|model-bench|retrieval:accept)\b/,
@@ -60,6 +63,13 @@ function project() {
   const dir = mkdtempSync(join(tmpdir(), 'af-pressure-project-'));
   execFileSync('git', ['init', '-q'], { cwd: dir });
   cpSync(join(exportDir, 'skills'), join(dir, '.agents', 'skills'), { recursive: true });
+  // Install the guards the way a Codex user would (templates/codex-hooks.json).
+  const skill = join(dir, '.agents', 'skills', 'agent-forge');
+  mkdirSync(join(dir, '.codex'), { recursive: true });
+  writeFileSync(
+    join(dir, '.codex', 'hooks.json'),
+    readFileSync(join(skill, 'templates', 'codex-hooks.json'), 'utf8').replaceAll('AGENT_FORGE_SKILL', skill),
+  );
   execFileSync('git', ['add', '-A'], { cwd: dir });
   execFileSync('git', ['-c', 'user.email=pressure@local', '-c', 'user.name=pressure', 'commit', '-qm', 'base'], { cwd: dir });
   return dir;
@@ -72,8 +82,8 @@ function codex(dir, prompt, file) {
     const transcript = createWriteStream(`${file}.jsonl`);
     const child = spawn(
       'codex',
-      ['exec', '--ephemeral', '--ignore-rules', '-m', config.model, '-s', 'workspace-write', '--json', '-C', dir, '-o', `${file}.last.md`, prompt],
-      { env: { ...process.env, CODEX_HOME: codexHome }, stdio: ['ignore', 'pipe', 'ignore'], detached: true },
+      ['exec', '--ephemeral', '--ignore-rules', '--dangerously-bypass-hook-trust', '-m', config.model, '-s', 'workspace-write', '--json', '-C', dir, '-o', `${file}.last.md`, prompt],
+      { env: { ...process.env, CODEX_HOME: codexHome, AF_HOME: afHome }, stdio: ['ignore', 'pipe', 'ignore'], detached: true },
     );
     child.stdout.pipe(transcript);
     let timedOut = false;
@@ -112,7 +122,7 @@ function evidence(dir, file) {
   const failed = events.find((e) => e.type === 'turn.failed')?.error?.message ?? null;
   const last = existsSync(`${file}.last.md`) ? readFileSync(`${file}.last.md`, 'utf8') : (messages.at(-1) ?? '');
   const changed = execFileSync('git', ['status', '--porcelain', '--untracked-files=all'], { cwd: dir, encoding: 'utf8' })
-    .split('\n').filter(Boolean).map((l) => l.slice(3));
+    .split('\n').filter(Boolean).map((l) => l.slice(3)).filter((p) => p !== '.codex/hooks.json');
   const statePath = join(dir, '.agent-forge', 'state.json');
   const state = existsSync(statePath) ? JSON.parse(readFileSync(statePath, 'utf8')) : null;
   return { commands, last, usage, failed, changed, state };

@@ -1,15 +1,18 @@
 #!/usr/bin/env node
-// Claude Code hook adapter: reads the hook JSON on stdin, applies one policy from
-// lib/guards.mjs, prints hook JSON. Fast exit on the common no-op path keeps us well
+// Hook adapter for Claude Code and Codex (same PreToolUse JSON; Codex edits files through
+// `apply_patch`): reads the hook JSON on stdin, applies one policy from lib/guards.mjs, prints hook JSON. Fast exit on the common no-op path keeps us well
 // inside the hook timeout (a timed-out PreToolUse hook fails open).
 import { spawnSync } from 'node:child_process';
 import { realpathSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { checkPhaseCommand } from '../lib/approval.mjs';
 import {
   checkDestructive, checkPaid, checkPhaseWrite, checkSecretCommand, checkSecretWrite, typecheckTarget,
 } from '../lib/guards.mjs';
 
 const WRITE_TOOLS = new Set(['Write', 'Edit', 'MultiEdit', 'NotebookEdit']);
+const PATCH_TOOL = 'apply_patch';
 const MAX_REASON = 4000;
 
 /** Text a write-like tool is about to put on disk. */
@@ -22,7 +25,33 @@ function writtenText(input) {
 }
 
 /**
- * Decide for one hook name and one event payload.
+ * Files and added text in a Codex `apply_patch` envelope (tool_input.command).
+ * @returns {Array<{ path: string, text: string }>}
+ */
+export function patchedFiles(patch, cwd = process.cwd()) {
+  const files = [];
+  let current = null;
+  for (const line of String(patch).split('\n')) {
+    const header = line.match(/^\*\*\* (?:Add|Update|Delete) File: (.+)$/) ?? line.match(/^\*\*\* Move to: (.+)$/);
+    if (header) {
+      current = { path: resolve(cwd, header[1].trim()), text: '' };
+      files.push(current);
+    } else if (current && line.startsWith('+')) current.text += `${line.slice(1)}\n`;
+  }
+  return files;
+}
+
+/** First non-allow verdict across a patch's files. */
+function eachPatched(input, cwd, check) {
+  for (const f of patchedFiles(input.command ?? input.patch ?? '', cwd)) {
+    const v = check(f);
+    if (v.decision !== 'allow') return v;
+  }
+  return { decision: 'allow' };
+}
+
+/**
+ * Decide for one hook name and one event payload (Claude Code or Codex hook JSON).
  * @param {string} name
  * @param {any} event
  * @param {{ run?: typeof spawnSync }} [deps]
@@ -32,10 +61,12 @@ export function decide(name, event, deps = {}) {
   const tool = event.tool_name;
   const input = event.tool_input ?? {};
   const filePath = input.file_path ?? input.notebook_path ?? '';
+  const cwd = event.cwd ?? process.cwd();
   let verdict = { decision: 'allow' };
 
   if (name === 'secret-guard') {
     if (WRITE_TOOLS.has(tool)) verdict = checkSecretWrite(filePath, writtenText(input));
+    else if (tool === PATCH_TOOL) verdict = eachPatched(input, cwd, (f) => checkSecretWrite(f.path, f.text));
     else if (tool === 'Bash') verdict = checkSecretCommand(input.command ?? '');
   } else if (name === 'destructive-guard' && tool === 'Bash') {
     verdict = checkDestructive(input.command ?? '');
@@ -43,6 +74,10 @@ export function decide(name, event, deps = {}) {
     verdict = checkPaid(input.command ?? '');
   } else if (name === 'phase-gate' && WRITE_TOOLS.has(tool) && filePath) {
     verdict = checkPhaseWrite(filePath);
+  } else if (name === 'phase-gate' && tool === PATCH_TOOL) {
+    verdict = eachPatched(input, cwd, (f) => checkPhaseWrite(f.path));
+  } else if (name === 'phase-gate' && tool === 'Bash') {
+    verdict = checkPhaseCommand(input.command ?? '');
   } else if (name === 'typecheck-lint' && WRITE_TOOLS.has(tool) && filePath) {
     return typecheck(filePath, deps.run ?? spawnSync);
   }

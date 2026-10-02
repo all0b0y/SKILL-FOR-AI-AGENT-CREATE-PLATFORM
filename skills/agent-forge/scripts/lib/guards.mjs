@@ -3,6 +3,7 @@
 // and hook-less runtimes such as Hermes enforce the same rules.
 import { existsSync } from 'node:fs';
 import { basename, join, relative, sep } from 'node:path';
+import { afHome } from './approval.mjs';
 import { findProjectRoot, status, STATE_DIR } from './state.mjs';
 
 /** @typedef {{ decision: 'allow' | 'deny' | 'ask', reason?: string }} Verdict */
@@ -126,6 +127,8 @@ const PLANNING = [`${STATE_DIR}/`];
  * @returns {Verdict}
  */
 export function checkPhaseWrite(filePath) {
+  const home = relative(afHome(), filePath);
+  if (!home.startsWith('..') && !home.startsWith(sep)) return deny('phase-gate: the agent-forge signing key directory is off-limits to agents.');
   const root = findProjectRoot(filePath.split(sep).slice(0, -1).join(sep) || sep);
   if (!root) return allow();
   const rel = relative(root, filePath).split(sep).join('/');
@@ -138,7 +141,7 @@ export function checkPhaseWrite(filePath) {
   const open = st.phases.filter((p) => ['grill', 'architect'].includes(p.id) && p.status !== 'closed');
   if (open.length === 0) return allow();
   const first = open[0];
-  return deny(`phase-gate: application code is locked until phases grill and architect are closed; "${first.id}" is ${first.status}. Continue with /agent-forge-${first.id}, then \`af close ${first.id}\`.`);
+  return deny(`phase-gate: application code is locked until phases grill and architect are closed; "${first.id}" is ${first.status}. Continue with /agent-forge-${first.id}; when the user has confirmed the result, they close it themselves with \`af close ${first.id}\` in their own terminal.`);
 }
 
 // ---------------------------------------------------------------- typecheck-lint

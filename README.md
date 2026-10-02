@@ -47,6 +47,16 @@ claude --plugin-dir "$PWD/.agent-forge-tmp/package"
 
 In the session, invoke `/agent-forge:agent-forge`. The router starts or resumes the appropriate phase. It asks before decisions that need your input; phase artifacts remain in the generated project's `.agent-forge/` directory.
 
+### You approve the interview and the architecture
+
+Application code stays locked until **you** close the `grill` and `architect` phases in your own terminal:
+
+```sh
+node /path/to/agent-forge/scripts/af.mjs close grill    # later: close architect
+```
+
+The command runs the phase gate, shows what you are approving, and asks you to type the phase name. It refuses when it runs inside an AI-agent session (Claude Code, Codex, Hermes and similar) or without a terminal. The agent therefore stops and hands you the command, even if you asked it to skip ahead. Each close is signed with a key in `~/.agent-forge/` (`AF_HOME` overrides it). A hand-edited `.agent-forge/state.json` shows as `unverified` and unlocks nothing. This is a guard against shortcuts, not a security boundary: an agent running as your OS user that deliberately sets out to defeat it could read the key. The later phases (build, evals, ui) close on their automated gates.
+
 The exported directory is also a local marketplace:
 
 ```sh
@@ -73,7 +83,7 @@ hermes
 
 Invoke the `agent-forge` skill. Project-local skills require project trust. Do not copy a working template's `node_modules` or local configuration—use the clean export above. The package does not assume that `npx skills add` supports a Hermes target.
 
-Claude plugin hooks are not automatically installed in other runtimes. The skills require explicit equivalents: `af check-write`, `af check-command`, typecheck and lint. Here `af` means `node /path/to/agent-forge/scripts/af.mjs`, not a globally installed command.
+Claude plugin hooks are not automatically installed in other runtimes. In **Codex CLI**, install the same guards as project hooks: copy `skills/agent-forge/templates/codex-hooks.json` to `<project>/.codex/hooks.json`, replace `AGENT_FORGE_SKILL` with the absolute skill path, and trust the hooks when Codex asks. They cover shell commands and `apply_patch` edits. In runtimes without hooks, the skills require explicit equivalents: `af check-write`, `af check-command`, typecheck and lint. Here `af` means `node /path/to/agent-forge/scripts/af.mjs`, not a globally installed command. The human close of grill and architect is enforced by `af` itself in every runtime.
 
 ## Run the reference application
 

@@ -1,9 +1,11 @@
 // Phase state machine for an agent-forge project.
 // `.agent-forge/state.json` is written only here; a phase counts as closed only while
-// the hashes recorded at close time still match the artifacts on disk.
+// the hashes recorded at close time still match the artifacts on disk and its record carries a
+// valid signature (lib/approval.mjs). Human phases additionally need the user's approval to close.
 import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
+import { HUMAN_PHASES, humanApproval, sign, verify } from './approval.mjs';
 
 export const STATE_DIR = '.agent-forge';
 export const STATE_FILE = `${STATE_DIR}/state.json`;
@@ -52,15 +54,17 @@ export const emptyState = () => ({ version: 1, phases: {} });
 
 /**
  * Status of every phase. A closed phase is `stale` when its own artifact or any earlier
- * phase's artifact changed after it closed — the spec edit that reopens downstream work.
+ * phase's artifact changed after it closed — the spec edit that reopens downstream work — and
+ * `unverified` when its record was not written by `af close` on this user's machine.
  * @param {string} root
- * @returns {{ phases: Array<{ id: string, status: 'open'|'closed'|'stale', changed: string[] }>, current: string | null }}
+ * @returns {{ phases: Array<{ id: string, status: 'open'|'closed'|'stale'|'unverified', changed: string[] }>, current: string | null }}
  */
 export function status(root) {
   const state = readState(root);
   const phases = PHASES.map((phase, i) => {
     const rec = state.phases[phase.id];
     if (!rec) return { id: phase.id, status: 'open', changed: [] };
+    if (!verify(phase.id, rec)) return { id: phase.id, status: 'unverified', changed: [] };
     const changed = PHASES.slice(0, i + 1)
       .map((p) => p.artifact)
       .filter((a) => rec.hashes?.[a] !== hashFile(join(root, a)));
@@ -77,17 +81,24 @@ export function status(root) {
 }
 
 /**
- * Record a phase as closed. Caller must have run the phase gate green first.
+ * Record a phase as closed and sign the record. Caller must have run the phase gate green first.
+ * Human phases (grill, architect) also need the user's approval; `deps.approve` replaces the
+ * terminal prompt in tests only.
  * @param {string} root
  * @param {string} id
  * @param {Date} [now]
+ * @param {{ approve?: (phase: string) => string, summary?: string, ancestor?: () => string | null }} [deps]
  */
-export function markClosed(root, id, now = new Date()) {
+export function markClosed(root, id, now = new Date(), deps = {}) {
   const i = phaseIndex(id);
+  const approvedBy = HUMAN_PHASES.has(id)
+    ? (deps.approve ?? ((phase) => humanApproval(phase, { summary: deps.summary, ancestor: deps.ancestor })))(id)
+    : 'gate';
   const state = readState(root);
   const hashes = Object.fromEntries(
     PHASES.slice(0, i + 1).map((p) => [p.artifact, hashFile(join(root, p.artifact))]),
   );
-  state.phases[id] = { closedAt: now.toISOString(), hashes };
+  const rec = { closedAt: now.toISOString(), approvedBy, hashes };
+  state.phases[id] = { ...rec, sig: sign(id, rec) };
   writeState(root, state);
 }

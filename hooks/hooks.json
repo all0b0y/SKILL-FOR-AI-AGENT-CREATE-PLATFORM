@@ -1,5 +1,5 @@
 {
-  "description": "agent-forge guards: phase-gate, secret-guard, destructive-guard, paid-call-guard (PreToolUse) and typecheck-lint (PostToolUse).",
+  "description": "agent-forge guards: phase-gate (writes and phase-closing commands), secret-guard, destructive-guard, paid-call-guard (PreToolUse) and typecheck-lint (PostToolUse).",
   "hooks": {
     "PreToolUse": [
       {
@@ -30,6 +30,16 @@
       {
         "matcher": "Bash",
         "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "${CLAUDE_PLUGIN_ROOT}/skills/agent-forge/scripts/hooks/hook.mjs",
+              "phase-gate"
+            ],
+            "timeout": 10,
+            "statusMessage": "agent-forge: phase gate"
+          },
           {
             "type": "command",
             "command": "node",
