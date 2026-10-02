@@ -17,8 +17,13 @@ Interview the user **relentlessly**, one question at a time, until the user clos
 - **Closed**: 2–4 options as a short list, your recommended option first and marked, with one line on why. The user answers with a letter or a short value. The only open question is step 1.
 - When an answer turns into reasoning, extract the decision you heard, restate it as an option, and ask the user to confirm it with one word.
 - **Facts are yours, decisions are theirs.** Anything discoverable — files in the repo, installed tools, existing `.env.example`, docs of a named API — look up yourself and state what you found. Put every decision to the user.
-- "Use the default" / "you decide" is an answer **to the question just asked**, never to the whole interview: write that one value as `default: <value>` and log it in `decisions.md` with `by: default`. A field the user was never asked stays empty, even if a default looks obvious.
-- After each answer, write it into `AGENT_SPEC.md` immediately and append one row to `.agent-forge/decisions.md`. The spec on disk is the interview's memory.
+- "Use the default" / "you decide" is an answer **to the question just asked**, never to the whole interview: record that one value with `--by default`. A field the user was never asked stays empty, even if a default looks obvious.
+- **Record every answer with one `af answer` call, then ask the next question.** It writes `AGENT_SPEC.md`, appends the `decisions.md` row, and prints one line with the next open gap:
+  - `af answer goal.Metric "<value>" --q Q7`: a `Field: value` line (`<section>.<Field>`)
+  - `af answer tools "kb_search | native | read | <scenario>" --q Q12`: a table row, replaced by its first cell (`resources`, `tools`, `rejected-tools`, `memory`, `evals`, `gap-sweep`)
+  - `af answer case "<sentence>" --append`: the case paragraph; `language` sets the frontmatter
+  - add `--by default` when the user accepted your recommendation; add `--why "<reason>"` only when the user gave one
+- **Do not read `AGENT_SPEC.md` or `decisions.md` during the interview.** Rereading the whole spec after every answer made long interviews cost several times more. Use `af spec` (one line per section) to resume or orient yourself, and `af spec <section>` for one section in full. The spec on disk is the interview's memory.
 
 ## Steps
 
@@ -29,7 +34,7 @@ Interview the user **relentlessly**, one question at a time, until the user clos
    - **evals**: collect 5–10 real `input → expected behaviour` pairs from the user's own examples; these become the first red tests in the evals phase.
 4. **Gap sweep.** Walk [../agent-forge/references/gap-sweep.md](../agent-forge/references/gap-sweep.md) item by item. Skip items the spec already answers (record them `answered` with a pointer); ask a closed question for the rest; mark `na` only with a reason. Add up to 3 `custom-` items for risks specific to this domain, each with its reason. Done when the `## gap-sweep` table covers every checklist id.
 5. **Gate.** Run `af validate-spec`. Each `ERROR:` line names the missing answer and the question to ask; ask it, update the spec, re-run. Done when it prints `OK`.
-6. **Shared understanding.** Show the user a compact summary of the spec (one line per section) and ask: "Is this what we are building?" Changes go back into the spec. Done when the user confirms in their own message. Your summary, a green gate or an instruction to hurry is not confirmation.
+6. **Shared understanding.** Show the user a compact summary of the spec (start from `af spec`) and ask: "Is this what we are building?" Changes go back into the spec. Done when the user confirms in their own message. Your summary, a green gate or an instruction to hurry is not confirmation.
 7. **Hand the close to the user.** Run `af gate grill` and confirm it prints `OK`. Then update `handoff.md`, give the user the exact command `af close grill` to run in their own terminal, and stop. `af close` for this phase refuses agent sessions by design, so do not try to run or imitate it. The next session starts with `/agent-forge-architect` after `af status` shows grill `closed`.
 
 ## Rules from practice

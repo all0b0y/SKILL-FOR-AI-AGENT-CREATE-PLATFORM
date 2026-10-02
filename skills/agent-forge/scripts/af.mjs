@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 // af — the agent-forge toolkit CLI. Every deterministic step of the process lives here.
 // Usage: node <skill-dir>/scripts/af.mjs <command> [args]
-import { copyFileSync, existsSync, mkdirSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
+import { appendFileSync, copyFileSync, existsSync, mkdirSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { applyAnswer, decisionRow, specSummary } from './lib/answer.mjs';
 import { ApprovalRequired, checkPhaseShell } from './lib/approval.mjs';
 import { CHECKLIST, closePhase, runGate } from './lib/gates.mjs';
 import { checkDestructive, checkPaid, checkPhaseWrite, checkSecretCommand, checkSecretWrite } from './lib/guards.mjs';
@@ -15,6 +16,10 @@ const USAGE = `af — agent-forge toolkit
 
   af init [dir]                 create .agent-forge/ with AGENT_SPEC.md template and state.json
   af status [--json]            phases, their state, and the next phase to work on
+  af answer <target> <value> [--q Q7] [--why text] [--by user|default] [--append]
+                                record one interview answer in AGENT_SPEC.md and decisions.md;
+                                target: language | case | <section>.<Field> | <table-section> (value "a | b | c")
+  af spec [section]             one-line-per-section summary, or one section in full
   af validate-spec [path]       check AGENT_SPEC.md (grill gate)
   af gate <phase>               run a phase gate without closing it
   af close <phase>              run the gate and, if green, record the phase as closed
@@ -68,6 +73,35 @@ function printStatus(json) {
   out(next(st.current));
 }
 
+/** `af answer`: write one answer, log it, and report what the grill gate still needs. */
+function answer(args) {
+  const opts = { append: false, by: 'user', q: undefined, why: undefined };
+  const rest = [];
+  for (let i = 0; i < args.length; i++) {
+    const a = args[i];
+    if (a === '--append') opts.append = true;
+    else if (['--q', '--why', '--by'].includes(a)) opts[a.slice(2)] = args[++i];
+    else rest.push(a);
+  }
+  const [target, ...words] = rest;
+  const value = words.join(' ');
+  if (!target || !value.trim()) fail('ERROR: usage: af answer <target> <value> [--q Q7] [--why text] [--by user|default] [--append]', 2);
+  if (!['user', 'default'].includes(opts.by)) fail('ERROR: --by must be user or default.', 2);
+  const dir = join(root(), STATE_DIR);
+  const specPath = join(dir, 'AGENT_SPEC.md');
+  let updated;
+  try {
+    updated = applyAnswer(readFileSync(specPath, 'utf8'), target, value, opts);
+  } catch (error) {
+    fail(`ERROR: ${error.message}`);
+  }
+  writeFileSync(specPath, updated);
+  const date = new Date().toISOString().slice(0, 10);
+  appendFileSync(join(dir, 'decisions.md'), `${decisionRow({ date, target, value, ...opts })}\n`);
+  const errors = validateSpecFile(specPath, CHECKLIST);
+  out(`Recorded ${target}${opts.q ? ` (${opts.q})` : ''}, by ${opts.by}. Grill gate: ${errors.length ? `${errors.length} open; next: ${errors[0].replace(/^ERROR:\s*/, '')}` : 'green — show the summary (`af spec`) and ask the user to confirm.'}`);
+}
+
 function report(result, okLine) {
   if (!result.ok) fail(result.errors);
   out(okLine);
@@ -92,6 +126,15 @@ async function main(argv) {
       return init(args[0]);
     case 'status':
       return printStatus(args.includes('--json'));
+    case 'answer':
+      return answer(args);
+    case 'spec': {
+      const text = readFileSync(join(root(), STATE_DIR, 'AGENT_SPEC.md'), 'utf8');
+      if (!args[0]) return out(specSummary(text));
+      const m = text.split(/^(?=## )/m).find((part) => part.match(/^##\s+(\S+)/)?.[1].toLowerCase() === args[0].toLowerCase());
+      if (!m) fail(`ERROR: section "${args[0]}" not found.`);
+      return out(m.trimEnd());
+    }
     case 'validate-spec': {
       const path = args[0] ?? join(root(), STATE_DIR, 'AGENT_SPEC.md');
       if (!existsSync(path)) fail(`ERROR: ${path} not found. Run: af init`);

@@ -15,7 +15,7 @@ Router for a five-phase process that turns a user's need into a working AI-agent
 ## Route
 
 1. In the project directory, run `af status`. With no `.agent-forge/`, run `af init` first. Done when `af status` prints a `Next:` line.
-2. Read `.agent-forge/handoff.md` if it has content beyond the template; it says where the last session stopped.
+2. Read `.agent-forge/handoff.md` if it has content beyond the template; it says where the last session stopped. In grill, orient with `af spec`, not by reading `AGENT_SPEC.md`.
 3. Invoke exactly the phase skill named on the `Next:` line (`/agent-forge-grill`, `/agent-forge-architect`, `/agent-forge-build`, `/agent-forge-evals`, `/agent-forge-ui`). Load only that one: the later phases stay out of view so the current one gets full attention. An explicit argument (`/agent-forge build`) is honoured only when `af status` shows every earlier phase `closed`.
 4. A phase is finished only when `af close <phase>` prints `Closed`. **grill** and **architect** are closed by the user in their own terminal: `af close` asks them to confirm, signs the record, and refuses agent sessions. You run `af gate <phase>`, show the command, and stop. build, evals and ui close on their gates, so you run `af close` for those. After a close, write `.agent-forge/handoff.md` (where you stopped, what is next, open questions) and hand back to the user. The user starts the next phase.
 
