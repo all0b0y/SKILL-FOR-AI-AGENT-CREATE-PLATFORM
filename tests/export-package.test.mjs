@@ -35,6 +35,7 @@ test('export includes source but excludes credentials and generated files even i
   f.put(`${app}/.env.example`, 'AF_MODEL=mock\n');
   f.put(`${app}/src/main.ts`);
   f.put('.research/private.md');
+  f.put('security-fixtures/prompt-injection.json', '[]\n');
   f.put('.gitignore', '.agent-forge-tmp/\n');
   execFileSync('git', ['add', '-f', `${app}/.env.local`], { cwd: f.root });
   const result = f.run();
@@ -44,6 +45,7 @@ test('export includes source but excludes credentials and generated files even i
   assert.equal(readFileSync(join(f.out, app, '.env.example'), 'utf8'), 'AF_MODEL=mock\n');
   for (const file of [`${app}/src/main.ts`, 'README.md', 'LICENSE', 'hooks/hooks.json', '.claude-plugin/plugin.json']) assert(existsSync(join(f.out, file)), file);
   assert.equal(existsSync(join(f.out, '.research')), false);
+  assert.equal(existsSync(join(f.out, 'security-fixtures')), false);
 });
 
 test('existing export is never overwritten', (t) => {

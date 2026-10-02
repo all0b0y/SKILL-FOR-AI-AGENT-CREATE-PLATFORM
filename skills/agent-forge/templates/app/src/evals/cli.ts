@@ -13,6 +13,7 @@ import { CASES_DIR, type Case, isHoldout, loadCases } from './cases';
 import { Cassette, type Mode } from './cassette';
 import { repeatCount, requirePaidConsent } from './options';
 import { type CaseResult, runCase } from './runner';
+import { securityFixturesDir } from './security-fixtures';
 
 const args = process.argv.slice(2);
 const flag = (name: string) => {
@@ -31,8 +32,17 @@ function fail(lines: string[]): never {
 
 function cases(): Case[] {
   const { cases, errors } = loadCases();
-  if (errors.length) fail(errors);
-  return cases;
+  // Adversarial fixtures kept outside the distributed skill join the suite in the source repository.
+  const fixtures = securityFixturesDir();
+  const extra = fixtures ? loadCases(join(fixtures, 'evals', 'cases')) : { cases: [], errors: [] };
+  const all = [...cases, ...extra.cases];
+  const ids = all.map((c) => c.id);
+  const duplicates = ids
+    .filter((id, i) => ids.indexOf(id) !== i)
+    .map((id) => `ERROR: duplicate case id "${id}".`);
+  if (errors.length || extra.errors.length || duplicates.length)
+    fail([...errors, ...extra.errors, ...duplicates]);
+  return all;
 }
 
 function selected(all: Case[], split = flag('split') ?? 'dev'): Case[] {

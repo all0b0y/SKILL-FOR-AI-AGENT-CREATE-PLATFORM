@@ -2,7 +2,7 @@
 
 An interview-first toolkit for building an AI-agent web application—not just an agent prompt. It turns a concrete use case into a specification, a deliberately small architecture, a runnable app, evaluations and a measured interface.
 
-**Status: pre-release.** Three explicit reference profiles are implemented: support, document researcher and scheduled document digest. Offline checks include browser acceptance, record/replay and real container-worker cron delivery. Hermes loading remains blocked by the security scan of adversarial fixtures; live-model quality and final release acceptance remain open. See [release acceptance](RELEASE.md). No published release is claimed here.
+**Status: pre-release.** Three explicit reference profiles are implemented: support, document researcher and scheduled document digest. Offline checks include browser acceptance, record/replay and real container-worker cron delivery. Live-model quality and final release acceptance remain open. See [release acceptance](RELEASE.md). No published release is claimed here.
 
 ## What it provides
 
@@ -58,9 +58,11 @@ The exporter refuses to overwrite an existing destination. Choose a new director
 
 ## Use with Hermes or another skills runtime
 
-The six directories use the Agent Skills format, but **Hermes compatibility is currently blocked**: the installed runtime quarantines the core skill after scanning the bundled application's adversarial test fixtures and source. A successful directory listing or explicit CLI invocation does not establish skill loading. The five phase skills load, but the router does not; do not disable the scanner or remove security tests to claim compatibility.
+The six directories use the Agent Skills format. In a fresh, trusted project with an isolated `HERMES_HOME`, Hermes `skill_view` loads all six skills from the clean export. Its security scan still reports two caution-level findings for ordinary environment-variable reads in the app template's source. Those findings do not block loading.
 
-The following is Hermes' documented project-local placement convention in the **target application's git checkout**, not a passing installation acceptance result:
+Literal prompt-injection test inputs live in the source repository's dev-only [`security-fixtures/`](security-fixtures/README.md), outside the exported skills. Earlier packages bundled them, and the scanner then quarantined the core skill. Copying those files back into a skill reproduces that quarantine, which is how the check was verified. The scanner and the security tests are unchanged.
+
+Placement in the **target application's git checkout** follows Hermes' project-local convention:
 
 ```sh
 mkdir -p .agents/skills

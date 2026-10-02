@@ -7,7 +7,7 @@ This is a specification-to-implementation audit, not a release certificate. The 
 | ID | Requirement | Evidence / current result | Acceptance |
 |---|---|---|---|
 | 1 | Runnable agent application with its own UI | `templates/app`: web, worker, database, streaming UI and operator docs; Docker acceptance | Implemented offline |
-| 2 | Claude-first; portable skills with explicit non-Claude checks | Plugin strict validation; `af` CLI; Hermes runtime probe loads only five phase skills | **Blocked for Hermes** |
+| 2 | Claude-first; portable skills with explicit non-Claude checks | Plugin strict validation; `af` CLI; Hermes `skill_view` loads all six skills from the clean export | Implemented; Hermes reports caution-level env-read findings only |
 | 3 | Fixed TypeScript/Next/AI SDK/Postgres stack; CI evals | Pinned manifest/lock; build gate; offline CI workflows with dev replay | Implemented locally; **GitHub execution unverified** |
 | 4 | Lowest sufficient complexity with justification | Architecture validator and phase instructions enforce spec/model/tool mapping | Implemented; behavioral pressure test pending |
 | 5 | Router and five gated phases | Six skills, CLI/state/gate regression suite | Implemented |
@@ -22,7 +22,7 @@ This is a specification-to-implementation audit, not a release certificate. The 
 | 13 | Script-owned state, hashes, decisions and handoff | State/gate tests, stale-phase reopening | Implemented |
 | 14 | English code/skills, user's language for interview/spec | Skill instructions and templates | Implemented; behavior under pressure unverified |
 | 15 | Skill lint and recorded plugin pressure testing | Skill lint is executable and green | **Partial:** model-driven pressure tests have not run |
-| 16 | Plugin, marketplace and portable installation | Clean exporter; Claude manifest validation and skill discovery | **Blocked:** core Hermes skill quarantined |
+| 16 | Plugin, marketplace and portable installation | Clean exporter; Claude manifest validation and skill discovery; Hermes project-local load of all six skills; adversarial fixtures kept in dev-only `security-fixtures/` | Implemented; marketplace publication not performed |
 | 17 | Compose default; restricted Vercel alternative | Real container-worker smoke; spec rejects background work on Vercel | Implemented for Compose; Vercel deployment unverified |
 | 18 | Research → tracer bullet → phases → release | Primary-source references, working tracer bullet and phase machinery | Release intentionally not declared |
 | 19 | Support, researcher, scheduled background references | Three profiles with separate prompts/permissions; real cron digest; browser and replay suites | **Partial:** support tickets are local records, not a verified external ticket vendor; researcher is document-based, not web browsing |
@@ -64,21 +64,17 @@ Last full offline run (2026-10-02, mock model, hash embeddings, disposable local
 
 The eval gate's explicit `all` split is a release check. Routine CI selects `dev` instead. Fixture recordings are intentionally synthetic; they must never be presented as model-quality measurements or approved user cases. Do not automatically regenerate recordings when replay fails.
 
-## Hermes blocker, reproduced
+## Hermes loading, reproduced
 
-The installed Hermes runtime (`1b7355d7fa1fd18f46e43e3a5786e05caa0d804a`) was exercised through actual `skill_view` calls in a fresh, trusted project and isolated `HERMES_HOME`. `agent-forge` is quarantined; the five phase skills load. Critical findings point to literal adversarial inputs in:
+The installed Hermes runtime (`1b7355d7fa1fd18f46e43e3a5786e05caa0d804a`) was exercised through actual `skill_view` calls. Each run used a fresh, trusted project containing the clean export under `.agents/skills`, with an isolated `HERMES_HOME`. **All six skills load.** The scan verdict for `agent-forge` is `caution`, with two high-severity findings for ordinary environment reads (`src/env.ts`, `src/agent/tools/mcp.ts`). The other five are `safe`.
 
-- `templates/app/evals/cases/injection-user.yaml`
-- `templates/app/tests/runs.test.ts`
-- `templates/app/tests/references.test.ts`
-
-There are also caution-level findings in operational source/configuration. Listing or project trust alone does not resolve quarantine. The scanner, trust classification and security fixtures have not been weakened or removed. A documented, narrowly scoped fixture-exclusion policy or an upstream scanner correction needs an explicit security decision; repackaging to hide the same content is not accepted as a fix.
+Earlier packages were quarantined because literal prompt-injection inputs were bundled in the skill. Following the security decision, those inputs moved to the source repository's dev-only `security-fixtures/`, which the exporter never ships and an export test asserts. They still run in full in the source repository: three run-level regressions in `tests/security-fixtures.test.ts`, and three adversarial eval cases merged by the eval CLI (20/20 with `--split all`). The scanner, trust model and assertions are unchanged, and the text was not obfuscated. As a negative control, copying one fixture back into the exported skill makes Hermes quarantine it again.
 
 ## Conditions requiring separate permission/input
 
 - Approved real product cases and yes/no confirmation for generated variants.
 - A production model/embedding configuration, verified prices and a finite spending limit before live quality, compaction, model comparison or plugin pressure runs.
-- A security decision for the fixture/quarantine incompatibility.
+- A security decision for the fixture/quarantine incompatibility — **decided:** dev-only `security-fixtures/` outside the shipped skills.
 - External ticket-system choice, credentials and sandbox acceptance if that integration is part of v1.
 - Publication permission before committing, pushing, triggering real GitHub CI or publishing a release.
 

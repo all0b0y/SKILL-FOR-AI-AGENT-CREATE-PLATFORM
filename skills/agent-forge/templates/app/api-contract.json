@@ -229,6 +229,11 @@
       "architecture": ["limitations"],
       "exports": ["CaseResult", "runCase"]
     },
+    "src/evals/security-fixtures.ts": {
+      "spec": ["evals", "risks"],
+      "architecture": ["limitations"],
+      "exports": ["InjectionFixture", "injectionFixtures", "securityFixturesDir"]
+    },
     "src/identity.ts": {
       "spec": ["deployment", "users"],
       "architecture": ["boundaries"],
