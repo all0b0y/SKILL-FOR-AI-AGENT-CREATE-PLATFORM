@@ -128,3 +128,22 @@ sys.stdout.write(out.decode(errors="replace"))
   assert.match(run('grill'), /RESULT closed/);
   assert.match(run('yes'), /RESULT refused: Closing "grill" was not approved/);
 });
+
+test('bulk-copying the app template is blocked until both human phases are closed', () => {
+  const root = project();
+  for (const cmd of [
+    'cp -R .agents/skills/agent-forge/templates/app/. .',
+    'rsync -a ~/.claude/plugins/agent-forge/skills/agent-forge/templates/app/ ./',
+    'tar -C .agents/skills/agent-forge/templates/app -cf - . | tar -xf -',
+  ]) {
+    const hook = decide('phase-gate', { tool_name: 'Bash', cwd: root, tool_input: { command: cmd } });
+    assert.equal(hook?.hookSpecificOutput.permissionDecision, 'deny', cmd);
+    assert.match(hook.hookSpecificOutput.permissionDecisionReason, /build phase/);
+  }
+  const cli = spawnSync(process.execPath, [AF, 'check-command', 'cp -R .agents/skills/agent-forge/templates/app/. .'], { cwd: root, encoding: 'utf8' });
+  assert.equal(cli.status, 1);
+  markClosed(root, 'grill', new Date(), { approve });
+  markClosed(root, 'architect', new Date(), { approve });
+  assert.equal(decide('phase-gate', { tool_name: 'Bash', cwd: root, tool_input: { command: 'cp -R .agents/skills/agent-forge/templates/app/. .' } }), null);
+  assert.equal(decide('phase-gate', { tool_name: 'Bash', cwd: root, tool_input: { command: 'cat .agents/skills/agent-forge/templates/app/package.json' } }), null);
+});

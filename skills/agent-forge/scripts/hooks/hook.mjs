@@ -6,10 +6,17 @@ import { spawnSync } from 'node:child_process';
 import { realpathSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { checkPhaseCommand } from '../lib/approval.mjs';
+import { checkPhaseShell } from '../lib/approval.mjs';
 import {
   checkDestructive, checkPaid, checkPhaseWrite, checkSecretCommand, checkSecretWrite, typecheckTarget,
 } from '../lib/guards.mjs';
+import { findProjectRoot, status } from '../lib/state.mjs';
+
+/** Phase status of the project containing `cwd`, or null outside an agent-forge project. */
+const projectStatus = (cwd) => {
+  const root = findProjectRoot(cwd);
+  return root ? status(root) : null;
+};
 
 const WRITE_TOOLS = new Set(['Write', 'Edit', 'MultiEdit', 'NotebookEdit']);
 const PATCH_TOOL = 'apply_patch';
@@ -77,7 +84,7 @@ export function decide(name, event, deps = {}) {
   } else if (name === 'phase-gate' && tool === PATCH_TOOL) {
     verdict = eachPatched(input, cwd, (f) => checkPhaseWrite(f.path));
   } else if (name === 'phase-gate' && tool === 'Bash') {
-    verdict = checkPhaseCommand(input.command ?? '');
+    verdict = checkPhaseShell(input.command ?? '', projectStatus, cwd);
   } else if (name === 'typecheck-lint' && WRITE_TOOLS.has(tool) && filePath) {
     return typecheck(filePath, deps.run ?? spawnSync);
   }

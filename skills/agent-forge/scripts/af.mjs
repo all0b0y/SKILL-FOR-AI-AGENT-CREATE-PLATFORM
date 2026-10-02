@@ -4,7 +4,7 @@
 import { copyFileSync, existsSync, mkdirSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { ApprovalRequired, checkPhaseCommand } from './lib/approval.mjs';
+import { ApprovalRequired, checkPhaseShell } from './lib/approval.mjs';
 import { CHECKLIST, closePhase, runGate } from './lib/gates.mjs';
 import { checkDestructive, checkPaid, checkPhaseWrite, checkSecretCommand, checkSecretWrite } from './lib/guards.mjs';
 import { validateSpecFile } from './lib/spec.mjs';
@@ -118,7 +118,12 @@ async function main(argv) {
     case 'check-command': {
       const command = args.join(' ');
       if (!command) fail('ERROR: missing command. Usage: af check-command "<shell command>"', 2);
-      for (const check of [checkPhaseCommand, checkDestructive, checkSecretCommand, checkPaid]) {
+      const phaseShell = (c) =>
+        checkPhaseShell(c, (cwd) => {
+          const r = findProjectRoot(cwd);
+          return r ? status(r) : null;
+        });
+      for (const check of [phaseShell, checkDestructive, checkSecretCommand, checkPaid]) {
         const v = check(command);
         if (v.decision !== 'allow') return verdictExit(v);
       }

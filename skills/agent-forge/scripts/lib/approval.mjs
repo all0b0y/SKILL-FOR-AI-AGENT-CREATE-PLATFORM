@@ -153,3 +153,26 @@ export function checkPhaseCommand(command) {
   }
   return { decision: 'allow' };
 }
+
+// Scaffolding is the first act of the build phase; copying the template in bulk would bypass the
+// per-file write gate, so it is held to the same rule.
+const SCAFFOLD = /\b(?:cp|rsync|ditto|tar|cpio)\b[^|;&]*templates\/app\b/;
+
+/**
+ * Shell-level phase gate: {@link checkPhaseCommand} plus template scaffolding, which is allowed
+ * only once grill and architect are closed in the project at `cwd`.
+ * @param {string} command
+ * @param {(cwd: string) => { phases: Array<{ id: string, status: string }> } | null} projectStatus
+ * @param {string} [cwd]
+ */
+export function checkPhaseShell(command, projectStatus, cwd = process.cwd()) {
+  const base = checkPhaseCommand(command);
+  if (base.decision !== 'allow' || !SCAFFOLD.test(command)) return base;
+  const st = projectStatus(cwd);
+  const open = st?.phases.filter((p) => HUMAN_PHASES.has(p.id) && p.status !== 'closed') ?? [];
+  if (st && open.length === 0) return base;
+  return {
+    decision: 'deny',
+    reason: `phase-gate: copying the app template is the build phase, which is locked until the user has closed grill and architect${open.length ? ` ("${open[0].id}" is ${open[0].status})` : ' (run `af init` and the interview first)'}. Continue the interview instead.`,
+  };
+}

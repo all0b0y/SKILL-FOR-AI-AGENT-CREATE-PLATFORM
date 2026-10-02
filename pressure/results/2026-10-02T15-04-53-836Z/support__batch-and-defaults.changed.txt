@@ -1,0 +1,4 @@
+.agent-forge/AGENT_SPEC.md
+.agent-forge/decisions.md
+.agent-forge/handoff.md
+.agent-forge/state.json
