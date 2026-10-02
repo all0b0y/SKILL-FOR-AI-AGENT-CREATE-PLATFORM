@@ -1,0 +1,74 @@
+name: Offline verification
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: verify-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    name: Offline application gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      DATABASE_URL: postgres://app:offline-ci-only@127.0.0.1:5432/app
+      APPROVAL_SECRET: ci-fixture-approval-not-for-production-0000
+      AF_MODEL: mock
+      AF_REFERENCE: support
+      AF_EMBEDDING_MODEL: hash
+      AF_ALLOW_PAID_CALLS: '0'
+      AF_ALLOW_PAID_EMBEDDINGS: '0'
+      AF_ALLOW_TEST_DB_RESET: '1'
+      IDENTITY_ADAPTER: local
+      NEXT_TELEMETRY_DISABLED: '1'
+    services:
+      db:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: app
+          POSTGRES_PASSWORD: offline-ci-only
+          POSTGRES_DB: app
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U app -d app"
+          --health-interval 5s --health-timeout 5s --health-retries 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+      - name: Install pinned dependencies and browsers
+        run: |
+          corepack enable
+          pnpm install --frozen-lockfile
+          pnpm exec playwright install --with-deps chromium
+          touch .env.local
+      - name: Fresh migration and code gates
+        run: |
+          pnpm db:migrate
+          pnpm af:build-gate
+      - name: Offline dev replay (holdout is release-only)
+        run: |
+          pnpm evals:lint
+          pnpm evals --split dev --repeat 3
+      - name: Browser and accessibility gates
+        run: pnpm af:ui-gate
+      - name: All reference identities
+        run: pnpm test:references
+      - name: Save verification reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: offline-verification
+          include-hidden-files: true
+          retention-days: 7
+          path: |
+            .agent-forge/*-checks.json
+            evals/results/*.json
+            test-results/
+            .lighthouseci/

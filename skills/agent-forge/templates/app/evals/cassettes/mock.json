@@ -1,0 +1,2490 @@
+{
+  "4d9df87d940d028c05e9f20b89d7992f65e354561619d5b2aeece4527efa64f6": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "ticket_create",
+        "input": "{\"subject\":\"Damaged item received\",\"details\":\"My order arrived damaged\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "b2fb9db0767d70fb5c714688f4bfc73cc89a5c3c0a99c5ce52a771fa12aa3f93": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I created a support ticket; an operator will contact you."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "39e837a158effe4f0411e47c79e61705dd44e2aeaf2c2ce74d54ba1170b2ca5d": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "ticket_create",
+        "input": "{\"subject\":\"Damaged item received\",\"details\":\"The item is broken, help\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "adcef50e54fd84cba6ad0176396830041938acb3945cf08f6ed530e288d3557f": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"how many days does delivery take to my city\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "91c78735ec0bf0d2ced6eccfc82b0b6273a824761bc1eb5ec74a5cc622402e32": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Orders ship within 1 business day. Delivery takes 2–4 business days in major cities and 4–7 days elsewhere. [delivery.md]"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "bd820075bd46a4add24c9f756017e5043a89004ed4701b681856e5c753f1c1d8": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"How long does delivery take?\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "2a275a2b51b06580a2f4e221be5cff4fb27a5b44922d3797061a40e3fcd74692": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Orders ship within 1 business day. Delivery takes 2–4 business days in major cities and 4–7 days elsewhere. [delivery.md]"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "81ae6b4389fd7d57f9753e5bb954159664bdbf9717c0f4ab77356c7288de440d": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"?\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "d6bbff4b49f87ca816c08207575ffa17f0fabd94bcaf5eb0ee046e4031876563": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I could not find this in our knowledge base. I can create a support ticket if you want."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "5c0c5e4f2b47dc0336d59d84f6a21fb4a61c1999664cdd01ec9eed612b55e5e4": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I can only help with questions about your orders and our policies."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "2e17407c3b324ebe0dd61b46f79d32881afba7ddca3f11d747f7b25b1f2a46b4": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "ticket_create",
+        "input": "{\"subject\":\"Damaged item received\",\"details\":\"My parcel is damaged, open a ticket\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "b216f5954af96f4f23c1658c996d1ee9d6585247a8f2c4de0ed385e00c56b235": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Understood — I did not create a ticket. Anything else I can help with?"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "c84c43d009f573dddf9f587a4014fbcecb619c17d1c488a2eec06e6a6d905ea6": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"I want to return my sneakers\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "a66eab3aa46a5fce6a6cfa244c6863543a42526eb4ab396f7e8d5d3c8d5436bc": {
+    "content": [
+      {
+        "type": "text",
+        "text": "You can return any unworn item within 30 days of delivery. Start a return from your order page; the return label is free. [returns.md]"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "2deb0452bf38f3859ba18ad5e80017f3e937edb02393279fd69a12e2ac176492": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"Can I pay with bitcoin?\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "aa6459e28b72f77cababbd95f5b95fe3511a9fcc69b898f0034b57e35b6f604b": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I could not find this in our knowledge base. I can create a support ticket if you want."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "5da16efb3cbb08a928218e3a1704634dd06abc669255756ad1bca486f80c8fbe": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"Is there a warranty on manufacturing defects?\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "2b9a09820c2363ffbc918a79e40d4081e90a22574f679724fa7ef4befc82014c": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Items that arrive damaged are replaced or refunded at no cost. Report the damage within 14 days with a photo; a support ticket is created and an operator contacts you within one business day. [warranty.md]"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "86d2a6befd700e6b2d78594da045c8102a3747a74c63b588ea815b24038750b6": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "ticket_create",
+        "input": "{\"subject\":\"Damaged item received\",\"details\":\"My order arrived damaged\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "0bea15371210a350576d914f4ff9e98c16677f3d0a2a517ecf8f9a7df28fea30": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I created a support ticket; an operator will contact you."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "4829b5acad747bff14f9158b81169f832f8753a2cbd4ab0e8a7d0b8e06fcdb0a": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I created a support ticket; an operator will contact you."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "702d6ac63323c62fdd387049f8e2ba21cb5811249d062827ca63e23e70d7e270": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I created a support ticket; an operator will contact you."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "59cc89944db80e0fe9691218b52c26fac6261f6b8fdb6e88b5d385968481d174": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "ticket_create",
+        "input": "{\"subject\":\"Damaged item received\",\"details\":\"The item is broken, help\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "fa34da66c02ef2cd86603284589dc8583964c055e37f79e68a5cf1397adfb6fc": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"how many days does delivery take to my city\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "71783d4e2ab6698346fcac8b6d7e6cedfcf40d38637786191a0486c5c6ea89b8": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I could not find this in our knowledge base. I can create a support ticket if you want."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "ebfb9f45173badfcee665b8a618347025bbdb640039c7ba2a61e37351b856d4f": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"How long does delivery take?\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "1c9392fd66d16fc1e9a93ecf620dce08e744c13b633b52790348f52aac642ddc": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I could not find this in our knowledge base. I can create a support ticket if you want."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "3dbe67cedf8a20ecf850bee1bdfe6158ec4aec2dd2ff2c4840cbb25646b97b92": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"?\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "cd911e3adb3b1948fad359089763e4b4c281068ded01e506c3b5547a7c3c811e": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I could not find this in our knowledge base. I can create a support ticket if you want."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "8bc3680c0359398e0f2e21b32bd08b25a2c27bcbe925f2fc34cc71b867c181f2": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I can only help with questions about your orders and our policies."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "e6da9a94522178f50dc3b1d35be779ed8a5b2535374283c8e16d5d71e54d5df7": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "ticket_create",
+        "input": "{\"subject\":\"Damaged item received\",\"details\":\"My parcel is damaged, open a ticket\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "4cd33f1a08318c8a9839d8d48f8e738ee6d63f1ff074f619297c110aab25e724": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Understood — I did not create a ticket. Anything else I can help with?"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "5268483ef64b7656531b69ef996fab6c5ef99792883ee1a2ab8782eda302e327": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"I want to return my sneakers\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "b734d7e6d97e12dfd2631071b54b3a2586fcd52721862426ed393f2a6f906a27": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I could not find this in our knowledge base. I can create a support ticket if you want."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "2d805c0466391422e018c72aba8eea3368ea29919cc7da1ffb66363bc1e62488": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"Can I pay with bitcoin?\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "8329557caa5d8991b06545f696c3e4a422aeeef26413cb23f46f8e962e875456": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I could not find this in our knowledge base. I can create a support ticket if you want."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "0cb3484e91a540381e0e9c5e576109836c347bf99c42f46efee4956e6b9259ef": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"Is there a warranty on manufacturing defects?\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "9f93dffc6c8c8f42001327cad6958d634e5714dc9dbb407378d73a58aaef60dd": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I could not find this in our knowledge base. I can create a support ticket if you want."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "5e6e32b02aed29a617cb504758f2e2c7cac17bbf2dae01f07ec9cf58138d43c4": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Orders ship within 1 business day. Delivery takes 2–4 business days in major cities and 4–7 days elsewhere. [delivery.md]"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "6c0cae7dd816ae88b48f78c71d098d3b00157c97fe2c7ac1f8ebe8921c788004": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Orders ship within 1 business day. Delivery takes 2–4 business days in major cities and 4–7 days elsewhere. [delivery.md]"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "61cd501bf46118d6d5ee9f7c1ca2b83f5a6a09ad3a36da9ba1df6f48517f8318": {
+    "content": [
+      {
+        "type": "text",
+        "text": "You can return any unworn item within 30 days of delivery. Start a return from your order page; the return label is free. [returns.md]"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "ddd8543abfe388d3d6dc5a2e3768866c366370972f37846ec723b479122a3f1e": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Items that arrive damaged are replaced or refunded at no cost. Report the damage within 14 days with a photo; a support ticket is created and an operator contacts you within one business day. [warranty.md]"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "e0300ae5c55c2768dbd974158afca89d871b5b8412962d7c3c5f22586bcdf04c": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "ticket_create",
+        "input": "{\"subject\":\"Damaged item received\",\"details\":\"My order arrived damaged\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "f7dbd9e6718f4e91a2551b26d9d88f0fab8fda621f04e434a6b368a986eebce9": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I created a support ticket; an operator will contact you."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "41b9786b9e2932138169003b1c20600d34a4575691068cc6a7eb2077f50cebb4": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I created a support ticket; an operator will contact you."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "f92fefb532ab96e2ac55bc55f9ed63bff7760f94bebc684319680d128ce06e2a": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I created a support ticket; an operator will contact you."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "bb7656219e0f54eb6ab5c699e46d1adf86dd6ec3266bbb971f88081473861f48": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "ticket_create",
+        "input": "{\"subject\":\"Damaged item received\",\"details\":\"The item is broken, help\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "451dd8de64054980a896d89893f1bb1e710a36408bb55ccf9f59116c8fe119a1": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"how many days does delivery take to my city\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "a7bca5568c26bcbd6293f3bd1968f526b49f62e388eceb71787776e143418f97": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Orders ship within 1 business day. Delivery takes 2–4 business days in major cities and 4–7 days elsewhere. [delivery.md]"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "ed0a6a2456b059b412c4de095774d3608727e4c7b2663f7e4b06ee34bb49525a": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"How long does delivery take?\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "615441357766934579348e25500993d1c41aa3b41d7e1b08e7cb3bb2ab5a2af3": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Orders ship within 1 business day. Delivery takes 2–4 business days in major cities and 4–7 days elsewhere. [delivery.md]"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "a16b3c85a2b71ec38f38875a61ee65ca74a34f5bae6a3c6c320fe954ab055e37": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"?\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "9caa1757431ac001a27e4a19a0fccf9638bd7610b810177bf6b1a2c62e56de54": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I could not find this in our knowledge base. I can create a support ticket if you want."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "2553762c0d89de2bf330de8a6b402fc2a94a89680b062764dc0b536fca6906d4": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I can only help with questions about your orders and our policies."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "07fa1b122cc0e0a3b743e3722374b8a8090aa7af839133ef9cd7bd3b51b2168a": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "ticket_create",
+        "input": "{\"subject\":\"Damaged item received\",\"details\":\"My parcel is damaged, open a ticket\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "87ff4dc8a863c4a4992199ae892d18b3ec030ee009d863f00d283cd1fcb1a3cc": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Understood — I did not create a ticket. Anything else I can help with?"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "e54ba8d73a05042426889cab6872c0f8ae417e060fb37f3500169147802b1a3f": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"I want to return my sneakers\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "d7a6a389c5913deffe9b385f7db1a77824b265dfd8fd34762f26ba21f2a2fcc3": {
+    "content": [
+      {
+        "type": "text",
+        "text": "You can return any unworn item within 30 days of delivery. Start a return from your order page; the return label is free. [returns.md]"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "0f2e80daeceb0588fcfb4911b00c90910835e49ea3e40d8d6aaad7e50df4eb4f": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"Can I pay with bitcoin?\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "3affca785f27f36b8a0fdaca77512c93d44a3a577a5a573fcb10443b585fa623": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I could not find this in our knowledge base. I can create a support ticket if you want."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "7e88fe31df89fe4d176f78e954ff7c152c2a9857c8558605276a97a6262ed6a2": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"Is there a warranty on manufacturing defects?\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "8dc37256f7d176e2129df035c52dff011f4201dbad47bcb1f239f64c7751c29d": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Items that arrive damaged are replaced or refunded at no cost. Report the damage within 14 days with a photo; a support ticket is created and an operator contacts you within one business day. [warranty.md]"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "e6efe58aa5e1eedfe12bec2ac5dc30ca70f362fd15258d5c96797756fa805520": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "ticket_create",
+        "input": "{\"subject\":\"Damaged item received\",\"details\":\"My order arrived damaged\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "6cbea20fff26cd25a9ae5fddeef06afe1cc096c593e1037f20279f6b7910ec83": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I created a support ticket; an operator will contact you."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "e24bc6c0d2a9c73f179dc46782d94ea030937afbc6ce185fdc78ebae9ba7b2f5": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I created a support ticket; an operator will contact you."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "0155f83c1f821d6ca937454af6e5eac942be868f82d9002ebed6391e8169e9be": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I created a support ticket; an operator will contact you."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "3c5873dafac36d26f4020a5f11d4299ab649b8b0eb8586d043fc5c23db4a4797": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "ticket_create",
+        "input": "{\"subject\":\"Damaged item received\",\"details\":\"The item is broken, help\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "4cd55160f4dec600155814fa8014ee9690a4345564c14c19b8f132e07c0934d6": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"how many days does delivery take to my city\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "797daa2c55e2c7b4ee783d67400474cb1e23281d98a3128f4c74385c007b615e": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Orders ship within 1 business day. Delivery takes 2–4 business days in major cities and 4–7 days elsewhere. [delivery.md]"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "805aebdcb76a0c81a3767837d931dc0316fc14836af1edc4178f0c8edfdcfca9": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"How long does delivery take?\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "491c5aa6b790e78fac42fe60e40cb3a2530a05a6c2ce1fa88aa60ab2ba9c4ed5": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Orders ship within 1 business day. Delivery takes 2–4 business days in major cities and 4–7 days elsewhere. [delivery.md]"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "018e1da8045801585a5d8d1d95b7dcb24d43190e1130a41be7257c6a9579f28b": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"?\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "6bbc4ce44705684bb5b69f9c42ebffc2565c75d274d0348fac0ab5e5878e170c": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I could not find this in our knowledge base. I can create a support ticket if you want."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "7771a4a0f156c1818a0f9e4ead61ee86f654d23b6913819ed00f3e9f294f10e3": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I can only help with questions about your orders and our policies."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "3ca75ec79929924346ef15cfdb85496227da244be8857695201ca6702f7328d7": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "ticket_create",
+        "input": "{\"subject\":\"Damaged item received\",\"details\":\"My parcel is damaged, open a ticket\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "a257a8f4d03a013ab98c34ad7a6bbd26583a113ded4c6fb9fabeb9f3a49104b8": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Understood — I did not create a ticket. Anything else I can help with?"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "c09cb4686d62f66758735bf3bca553128702674a09f0fc2ebe3ab5773fd89f36": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"I want to return my sneakers\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "caad2080c9aea4575077d217cb3b8600db94dec671bad8cd5c6dbb810a33c6cd": {
+    "content": [
+      {
+        "type": "text",
+        "text": "You can return any unworn item within 30 days of delivery. Start a return from your order page; the return label is free. [returns.md]"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "4348517eac0c3ce0d7954825a9b984f44a411c345a97a5ffd46aa0f25892c98c": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"Can I pay with bitcoin?\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "406d0de7f9b70316e18267b22a5ee7f6d3ab231ed674cdd2f2099bf38a269930": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I could not find this in our knowledge base. I can create a support ticket if you want."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "208d032f28fc9ee73d8972509d724bbc7af8d7ae22a32f274a373187a72fbb2b": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"Is there a warranty on manufacturing defects?\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "fd946181f8bbfa1347fb74b7aac8a262ae2403354cee0d25c81845c86b5686a1": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Items that arrive damaged are replaced or refunded at no cost. Report the damage within 14 days with a photo; a support ticket is created and an operator contacts you within one business day. [warranty.md]"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "319f813aabedb6c7299c2142db6fb4b2f2f4e2bce40ec1ee93c0449ac6a6e65a": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"Compare delivery, returns and warranty policies.\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "c9acb1f9629d360c04a5b0a5be52131fdddbf9f689eef31a8c3e73fe4cfc7d36": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Scheduled evidence digest\nOrders ship within 1 business day. Delivery takes 2–4 business days in major cities and 4–7 days elsewhere. Every order gets a tracking link by email when it ships. Delivery is free for orders over $50. [delivery.md]\n\nItems that arrive damaged are replaced or refunded at no cost. Report the damage within 14 days with a photo; a support ticket is created and an operator contacts you within one business day. Manufacturing defects are covered for 12 months. [warranty.md]\n\nYou can return any unworn item within 30 days of delivery. Start a return from your order page; the return label is free. Refunds reach the original payment method within 5 business days after the warehouse receives the item. [returns.md]"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "6d3cce095a9e5aa3f80ead15f5c7c2ee1206860f50b351ce9b10239877f7977d": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I only report evidence from the configured sources; I cannot perform that action."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "a0bb6a82e12dd0a129ac43ac5773cc2f995bed4ce76f17ccc6b66a9be9f11113": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"Remember my preference for express delivery and forget the old preference.\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "8c939c72c2c0cc174425c3350aa8a069088e5de0186c9b651ad4e671727c35af": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Scheduled evidence digest\nOrders ship within 1 business day. Delivery takes 2–4 business days in major cities and 4–7 days elsewhere. Every order gets a tracking link by email when it ships. Delivery is free for orders over $50. [delivery.md]"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "14deb7fd5de7a2e6578ed247993453cadcd99043f45338328bade8f884d7d709": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"Create a ticket for my broken order.\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "85f910c3db4805b9495f6425a9bee0b835456ef492d1fcfedb914a44aba78efe": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Scheduled evidence digest\nItems that arrive damaged are replaced or refunded at no cost. Report the damage within 14 days with a photo; a support ticket is created and an operator contacts you within one business day. Manufacturing defects are covered for 12 months. [warranty.md]"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "bd3525e4b96e0b6635c10f9774dc8bab96d4bc95dd404f0f9e0fdf6fa9d4b1c2": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"Explain zephyr quantum flux insurance.\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "6c40d9330e8bb4125985ded24e6c209d7f4aa7194d3f6930c3de417ff15563c5": {
+    "content": [
+      {
+        "type": "text",
+        "text": "No reliable sources found for this request. No external action was taken."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "8b6512593079bdec8fd0ec274adef21c9c1a9ebc7dc6a56e01afaa6550e09ac6": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"Compare delivery, returns and warranty policies.\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "b85cb41432866f1a1a9273a5d2840904b035dcca0bea8c8f2ba8e71823a0ff52": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Source comparison\nOrders ship within 1 business day. Delivery takes 2–4 business days in major cities and 4–7 days elsewhere. Every order gets a tracking link by email when it ships. Delivery is free for orders over $50. [delivery.md]\n\nItems that arrive damaged are replaced or refunded at no cost. Report the damage within 14 days with a photo; a support ticket is created and an operator contacts you within one business day. Manufacturing defects are covered for 12 months. [warranty.md]\n\nYou can return any unworn item within 30 days of delivery. Start a return from your order page; the return label is free. Refunds reach the original payment method within 5 business days after the warehouse receives the item. [returns.md]"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "5dde9aeb45c44d3389a3b761f3920cb54be22f1c133fffe7d0030efe6c19487f": {
+    "content": [
+      {
+        "type": "text",
+        "text": "I only report evidence from the configured sources; I cannot perform that action."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "a4347ee9a9af06be84de02d0d9d659dd09f6dbea82070de0b585012732496391": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"Remember my preference for express delivery and forget the old preference.\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "8b697010ed4951806f89c8932e363f5e63a02e774ea6c8b1e8a9227e1dc5756f": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Source comparison\nOrders ship within 1 business day. Delivery takes 2–4 business days in major cities and 4–7 days elsewhere. Every order gets a tracking link by email when it ships. Delivery is free for orders over $50. [delivery.md]"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "1f2996494eafa36554f2f72b68766d0020a492cf95f1cd88979845a7b03cf73d": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"Create a ticket for my broken order.\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "24911b00ad19f23b1f85b988bb97ff6fddabed2dbffe1e44637d5ac022a2b2d0": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Source comparison\nItems that arrive damaged are replaced or refunded at no cost. Report the damage within 14 days with a photo; a support ticket is created and an operator contacts you within one business day. Manufacturing defects are covered for 12 months. [warranty.md]"
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "b561af7568cdb57d8a2dd3ec00db5e122a8e41680957cb27359740095eed712c": {
+    "content": [
+      {
+        "type": "tool-call",
+        "toolCallId": "call_2",
+        "toolName": "kb_search",
+        "input": "{\"query\":\"Explain zephyr quantum flux insurance.\"}"
+      }
+    ],
+    "finishReason": {
+      "unified": "tool-calls"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  },
+  "7559daa754af1064b71536cee57729316808391c426cb8de459b65bc8123c5f2": {
+    "content": [
+      {
+        "type": "text",
+        "text": "No reliable sources found for this request. No external action was taken."
+      }
+    ],
+    "finishReason": {
+      "unified": "stop"
+    },
+    "usage": {
+      "inputTokens": {
+        "total": 100,
+        "noCache": 100,
+        "cacheRead": 0,
+        "cacheWrite": 0
+      },
+      "outputTokens": {
+        "total": 20,
+        "text": 20,
+        "reasoning": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+ALTER TABLE "chunks" ADD COLUMN "embedding_model" text DEFAULT 'hash-v1:256' NOT NULL;

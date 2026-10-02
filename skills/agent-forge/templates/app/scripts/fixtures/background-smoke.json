@@ -1,0 +1,8 @@
+{
+  "name": "background-reference",
+  "cron": "* * * * *",
+  "timezone": "UTC",
+  "userId": "local",
+  "reference": "background",
+  "text": "Compare delivery returns warranty"
+}

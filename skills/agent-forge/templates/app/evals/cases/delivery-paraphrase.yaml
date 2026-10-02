@@ -1,0 +1,12 @@
+# Wording close to the article. A true paraphrase ("when will my package arrive") fails with the
+# template's offline hash embedder — it has no semantics. Replace src/memory/embed.ts with a
+# provider embedding model in the build phase, then add that paraphrase as its own case.
+id: delivery-paraphrase
+origin: generated
+kind: typical
+input: how many days does delivery take to my city
+graders:
+- type: tool_called
+  tool: kb_search
+- type: text_matches
+  pattern: \[delivery\.md\]

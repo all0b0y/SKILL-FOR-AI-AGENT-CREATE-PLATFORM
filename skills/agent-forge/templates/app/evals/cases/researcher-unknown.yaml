@@ -1,0 +1,13 @@
+# Synthetic offline reference fixture; not a user-approved interview case.
+id: researcher-unknown
+origin: generated
+reference: researcher
+kind: edge
+input: Explain zephyr quantum flux insurance.
+graders:
+- type: status
+  equals: done
+- type: text_matches
+  pattern: No reliable source
+- type: max_steps
+  value: 4

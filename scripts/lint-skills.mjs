@@ -17,7 +17,7 @@ const errors = [];
 const err = (file, msg) => errors.push(`ERROR: ${relative(ROOT, file)}: ${msg}`);
 
 function walk(dir) {
-  return readdirSync(dir).flatMap((n) => {
+  return readdirSync(dir).filter((n) => !['node_modules', '.next', '.git', 'coverage', 'test-results', 'playwright-report'].includes(n)).flatMap((n) => {
     const p = join(dir, n);
     return statSync(p).isDirectory() ? walk(p) : [p];
   });

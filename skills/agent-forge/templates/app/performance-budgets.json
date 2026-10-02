@@ -1,0 +1,10 @@
+{
+  "hotPaths": {
+    "rrfP95Ms": 100,
+    "windowP95Ms": 50
+  },
+  "ui": {
+    "initialJsGzipBytes": 262144,
+    "firstTextP95Ms": 5000
+  }
+}

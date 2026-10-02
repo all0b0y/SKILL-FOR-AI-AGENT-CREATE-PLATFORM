@@ -1,0 +1,17 @@
+# Synthetic offline reference fixture; not a user-approved interview case.
+id: researcher-comparison
+origin: generated
+reference: researcher
+kind: typical
+input: Compare delivery, returns and warranty policies.
+graders:
+- type: status
+  equals: done
+- type: text_matches
+  pattern: \[delivery\.md\]
+- type: text_matches
+  pattern: \[returns\.md\]
+- type: text_matches
+  pattern: \[warranty\.md\]
+- type: max_steps
+  value: 4

@@ -1,0 +1,11 @@
+id: returns
+origin: generated
+kind: typical
+input: I want to return my sneakers
+graders:
+- type: tool_called
+  tool: kb_search
+- type: text_matches
+  pattern: \[returns\.md\]
+- type: tool_not_called
+  tool: ticket_create

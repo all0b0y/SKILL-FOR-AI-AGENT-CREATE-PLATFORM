@@ -4,6 +4,10 @@ Versions: `next@16.3`, `react@19.2`, `ai@7.0`, `@ai-sdk/react@4.0`, `@ai-sdk/ant
 
 ## AI SDK 7
 
+The runnable template uses `streamText({ instructions, messages, tools, stopWhen, toolApproval, onError })` directly: it provides the tool loop plus explicit error handling without the SDK's default raw console error dump. Errors from `fullStream` still fail the run. `ToolLoopAgent` below remains an alternative when that hook is not needed.
+
+For record/replay, inject a fixed prompt date and deterministic tool-created IDs through eval-only run options. Do not omit tool results from cassette keys: changed business output must invalidate a recording. Record each desired repetition explicitly; fixtures are not model-quality evidence. Integration tests truncate tables, so use a disposable database with `AF_ALLOW_TEST_DB_RESET=1`, then re-ingest the knowledge fixture before evals.
+
 | Write | Not (older APIs) |
 |---|---|
 | `new ToolLoopAgent({ model, instructions, tools, stopWhen: isStepCount(n), toolApproval, telemetry })` | `Experimental_Agent`, `stepCountIs` (alias only), `maxSteps` |

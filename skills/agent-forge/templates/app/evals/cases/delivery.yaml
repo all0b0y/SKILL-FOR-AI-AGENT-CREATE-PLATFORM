@@ -1,0 +1,13 @@
+id: delivery
+origin: generated
+kind: typical
+input: How long does delivery take?
+graders:
+- type: tool_called
+  tool: kb_search
+- type: text_matches
+  pattern: \[delivery\.md\]
+- type: status
+  equals: done
+- type: max_steps
+  value: 4

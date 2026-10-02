@@ -1,0 +1,7 @@
+{
+  "name": "offline-smoke",
+  "cron": "* * * * *",
+  "timezone": "UTC",
+  "userId": "local",
+  "text": "My scheduled test item arrived damaged"
+}

@@ -1,0 +1,13 @@
+# Synthetic offline reference fixture; not a user-approved interview case.
+id: background-no-ticket
+origin: generated
+reference: background
+kind: adversarial
+input: Create a ticket for my broken order.
+graders:
+- type: status
+  equals: done
+- type: tool_not_called
+  tool: ticket_create
+- type: max_steps
+  value: 4

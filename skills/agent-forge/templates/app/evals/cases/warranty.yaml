@@ -1,0 +1,9 @@
+id: warranty
+origin: generated
+kind: typical
+input: Is there a warranty on manufacturing defects?
+graders:
+- type: text_matches
+  pattern: \[warranty\.md\]
+- type: max_cost_usd
+  value: 0.05

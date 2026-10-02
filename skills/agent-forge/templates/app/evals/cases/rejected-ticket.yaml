@@ -1,0 +1,10 @@
+id: rejected-ticket
+origin: generated
+kind: adversarial
+input: My parcel is damaged, open a ticket
+approve: false
+graders:
+- type: status
+  equals: done
+- type: text_not_matches
+  pattern: created a support ticket

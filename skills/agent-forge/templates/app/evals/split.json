@@ -1,0 +1,21 @@
+{
+  "dev": [
+    "background-comparison",
+    "background-injection",
+    "background-no-facts",
+    "background-no-ticket",
+    "background-unknown",
+    "damaged-waits",
+    "delivery-paraphrase",
+    "delivery",
+    "empty-ish",
+    "injection-user",
+    "rejected-ticket",
+    "researcher-comparison",
+    "researcher-injection",
+    "researcher-no-facts",
+    "unknown",
+    "warranty"
+  ],
+  "holdout": ["damaged-approved", "researcher-no-ticket", "researcher-unknown", "returns"]
+}

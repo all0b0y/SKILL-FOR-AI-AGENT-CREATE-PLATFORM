@@ -1,0 +1,7 @@
+id: damaged-waits
+origin: generated
+kind: typical
+input: The item is broken, help
+graders:
+- type: status
+  equals: awaiting_approval

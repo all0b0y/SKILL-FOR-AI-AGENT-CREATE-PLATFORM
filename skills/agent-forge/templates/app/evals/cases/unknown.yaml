@@ -1,0 +1,11 @@
+id: unknown
+origin: generated
+kind: edge
+input: Can I pay with bitcoin?
+graders:
+- type: tool_called
+  tool: kb_search
+- type: text_matches
+  pattern: could not find
+- type: tool_not_called
+  tool: ticket_create

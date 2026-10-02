@@ -1,0 +1,12 @@
+id: damaged-approved
+origin: generated
+kind: typical
+input: My order arrived damaged
+approve: true
+graders:
+- type: tool_called
+  tool: ticket_create
+- type: status
+  equals: done
+- type: text_matches
+  pattern: ticket

@@ -1,0 +1,47 @@
+# app + worker + Postgres with pgvector. `docker compose up` runs the whole agent.
+services:
+  db:
+    image: pgvector/pgvector:0.8.6-pg17   # pinned: index format changes across pgvector minors
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+      POSTGRES_DB: app
+    ports: ["127.0.0.1:5432:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app"]
+      interval: 2s
+      retries: 30
+
+  app:
+    build: .
+    command: ["node", "scripts/start.mjs"]
+    env_file: [.env.local]
+    environment: &runtime
+      DATABASE_URL: postgres://app:app@db:5432/app
+      HOST: 0.0.0.0
+      # The container port is published on the host's 127.0.0.1 only (below), so a local
+      # identity stays single-user. Remove this line if you publish the port publicly.
+      AF_ALLOW_PUBLIC_LOCAL: docker-internal
+    ports: ["127.0.0.1:3000:3000"]
+    depends_on: { migrate: { condition: service_completed_successfully } }
+
+  worker:
+    build: .
+    command: ["node", "--import", "tsx", "src/worker.ts"]
+    env_file: [.env.local]
+    environment:
+      DATABASE_URL: postgres://app:app@db:5432/app
+    depends_on: { migrate: { condition: service_completed_successfully } }
+    stop_grace_period: 60s   # drain in-flight runs on deploy (AR-18)
+
+  # A fresh volume must have its schema before either request-serving process starts.
+  migrate:
+    build: .
+    command: ["pnpm", "db:migrate"]
+    env_file: [.env.local]
+    environment: *runtime
+    depends_on: { db: { condition: service_healthy } }
+
+volumes:
+  pgdata:

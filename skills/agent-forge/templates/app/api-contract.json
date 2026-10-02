@@ -1,0 +1,315 @@
+{
+  "version": 1,
+  "scope": "reference",
+  "modules": {
+    "src/agent/compact.ts": {
+      "spec": ["memory", "autonomy"],
+      "architecture": ["complexity", "durability"],
+      "exports": ["compactMessages"]
+    },
+    "src/agent/config.ts": {
+      "spec": ["autonomy", "budget"],
+      "architecture": ["complexity", "boundaries"],
+      "exports": ["AGENT_CONFIG"]
+    },
+    "src/agent/guardrails.ts": {
+      "spec": ["risks"],
+      "architecture": ["boundaries"],
+      "exports": ["UNTRUSTED_POLICY", "asUntrusted", "capText", "mask"]
+    },
+    "src/agent/history.ts": {
+      "spec": ["memory", "autonomy"],
+      "architecture": ["complexity", "durability"],
+      "exports": ["closeInterruptedTurns"]
+    },
+    "src/agent/mock-model.ts": {
+      "spec": ["evals", "budget"],
+      "architecture": ["limitations"],
+      "exports": ["mockSupportModel"]
+    },
+    "src/agent/model.ts": {
+      "spec": ["autonomy", "budget"],
+      "architecture": ["complexity", "boundaries"],
+      "exports": ["resolveModel"]
+    },
+    "src/agent/pricing.ts": {
+      "spec": ["autonomy", "budget"],
+      "architecture": ["complexity", "boundaries"],
+      "exports": ["costUsd", "priceOf"]
+    },
+    "src/agent/prompts.ts": {
+      "spec": ["evals", "budget"],
+      "architecture": ["limitations"],
+      "exports": ["Prompt", "loadPrompt", "parsePrompt"]
+    },
+    "src/agent/run.ts": {
+      "spec": ["autonomy", "budget"],
+      "architecture": ["complexity", "boundaries"],
+      "exports": ["RunOptions", "RunOutcome", "executeRun"]
+    },
+    "src/agent/tools/define.ts": {
+      "spec": ["tools"],
+      "architecture": ["tools", "durability"],
+      "exports": ["RegisteredTool", "ToolContext", "ToolInputError", "ToolSpec", "backoffMs", "defineTool"]
+    },
+    "src/agent/tools/mcp.ts": {
+      "spec": ["tools"],
+      "architecture": ["tools", "durability"],
+      "exports": ["McpConfig", "configuredMcpTools", "openMcpTools"]
+    },
+    "src/agent/tools/registry.ts": {
+      "spec": ["tools"],
+      "architecture": ["tools", "durability"],
+      "exports": ["createRegistry", "userFacts"]
+    },
+    "src/agent/trace-exporter.ts": {
+      "spec": ["risks"],
+      "architecture": ["boundaries", "limitations"],
+      "exports": ["PostgresSpanExporter"]
+    },
+    "src/agent/trace.ts": {
+      "spec": ["risks"],
+      "architecture": ["boundaries", "limitations"],
+      "exports": ["SpanInput", "Tracer"]
+    },
+    "src/agent/window.ts": {
+      "spec": ["memory", "autonomy"],
+      "architecture": ["complexity", "durability"],
+      "exports": ["Msg", "windowStart"]
+    },
+    "src/app/api/runs/[id]/approval/route.ts": {
+      "spec": ["users", "risks"],
+      "architecture": ["boundaries", "durability"],
+      "exports": ["POST"]
+    },
+    "src/app/api/runs/[id]/cancel/route.ts": {
+      "spec": ["users", "risks"],
+      "architecture": ["boundaries", "durability"],
+      "exports": ["POST"]
+    },
+    "src/app/api/runs/[id]/events/route.ts": {
+      "spec": ["users", "risks"],
+      "architecture": ["boundaries", "durability"],
+      "exports": ["GET"]
+    },
+    "src/app/api/runs/[id]/spans/route.ts": {
+      "spec": ["users", "risks"],
+      "architecture": ["boundaries", "durability"],
+      "exports": ["GET"]
+    },
+    "src/app/api/runs/route.ts": {
+      "spec": ["users", "risks"],
+      "architecture": ["boundaries", "durability"],
+      "exports": ["GET", "POST"]
+    },
+    "src/app/api/webhooks/route.ts": {
+      "spec": ["users", "risks"],
+      "architecture": ["boundaries", "durability"],
+      "exports": ["POST"]
+    },
+    "src/app/layout.tsx": {
+      "spec": ["ui"],
+      "architecture": ["boundaries", "durability"],
+      "exports": ["default", "generateMetadata", "viewport"]
+    },
+    "src/app/page.tsx": {
+      "spec": ["ui"],
+      "architecture": ["boundaries", "durability"],
+      "exports": ["default"]
+    },
+    "src/app/runs/[id]/page.tsx": {
+      "spec": ["ui"],
+      "architecture": ["boundaries", "durability"],
+      "exports": ["default", "dynamic"]
+    },
+    "src/app/runs/page.tsx": {
+      "spec": ["ui"],
+      "architecture": ["boundaries", "durability"],
+      "exports": ["default", "dynamic"]
+    },
+    "src/components/agent/answer.tsx": {
+      "spec": ["ui"],
+      "architecture": ["boundaries", "durability"],
+      "exports": ["Answer"]
+    },
+    "src/components/agent/approval-card.tsx": {
+      "spec": ["ui"],
+      "architecture": ["boundaries", "durability"],
+      "exports": ["ApprovalCard"]
+    },
+    "src/components/agent/chat.tsx": {
+      "spec": ["ui"],
+      "architecture": ["boundaries", "durability"],
+      "exports": ["Chat"]
+    },
+    "src/components/agent/cost-meter.tsx": {
+      "spec": ["ui"],
+      "architecture": ["boundaries", "durability"],
+      "exports": ["CostMeter"]
+    },
+    "src/components/agent/status-dot.tsx": {
+      "spec": ["ui"],
+      "architecture": ["boundaries", "durability"],
+      "exports": ["StatusDot"]
+    },
+    "src/components/agent/tool-card.tsx": {
+      "spec": ["ui"],
+      "architecture": ["boundaries", "durability"],
+      "exports": ["ToolCard"]
+    },
+    "src/components/agent/use-run.ts": {
+      "spec": ["ui"],
+      "architecture": ["boundaries", "durability"],
+      "exports": ["StreamView", "useRun"]
+    },
+    "src/components/nav.tsx": {
+      "spec": ["ui"],
+      "architecture": ["boundaries", "durability"],
+      "exports": ["Nav"]
+    },
+    "src/db/client.ts": {
+      "spec": ["memory", "deployment"],
+      "architecture": ["durability"],
+      "exports": ["Db", "db", "pool"]
+    },
+    "src/db/migrate.ts": {
+      "spec": ["memory", "deployment"],
+      "architecture": ["durability"],
+      "exports": []
+    },
+    "src/db/schema.ts": {
+      "spec": ["memory", "deployment"],
+      "architecture": ["durability"],
+      "exports": [
+        "EMBEDDING_DIMENSIONS",
+        "chunks",
+        "conversations",
+        "facts",
+        "messages",
+        "runEvents",
+        "runStatus",
+        "runs",
+        "spans",
+        "tickets",
+        "toolExecutions"
+      ]
+    },
+    "src/env.ts": {
+      "spec": ["deployment", "users"],
+      "architecture": ["boundaries"],
+      "exports": ["Env", "env"]
+    },
+    "src/evals/cases.ts": {
+      "spec": ["evals"],
+      "architecture": ["limitations"],
+      "exports": ["CASES_DIR", "Case", "Grader", "Transcript", "gradeDeterministic", "isHoldout", "loadCases"]
+    },
+    "src/evals/cassette.ts": {
+      "spec": ["evals"],
+      "architecture": ["limitations"],
+      "exports": ["Cassette", "Mode", "callKey", "withCassette"]
+    },
+    "src/evals/cli.ts": {
+      "spec": ["evals"],
+      "architecture": ["limitations"],
+      "exports": []
+    },
+    "src/evals/determinism.ts": {
+      "spec": ["evals"],
+      "architecture": ["limitations"],
+      "exports": ["evalRunOptions"]
+    },
+    "src/evals/options.ts": {
+      "spec": ["evals"],
+      "architecture": ["limitations"],
+      "exports": ["repeatCount", "requirePaidConsent"]
+    },
+    "src/evals/runner.ts": {
+      "spec": ["evals"],
+      "architecture": ["limitations"],
+      "exports": ["CaseResult", "runCase"]
+    },
+    "src/identity.ts": {
+      "spec": ["deployment", "users"],
+      "architecture": ["boundaries"],
+      "exports": ["Identity", "IdentityConfig", "IdentityError", "getIdentity", "signUserId"]
+    },
+    "src/lib/cn.ts": {
+      "spec": ["ui"],
+      "architecture": ["boundaries", "durability"],
+      "exports": ["cn"]
+    },
+    "src/lib/operation-id.ts": {
+      "spec": ["tools", "autonomy"],
+      "architecture": ["durability"],
+      "exports": ["operationId"]
+    },
+    "src/lib/run-events.ts": {
+      "spec": ["ui"],
+      "architecture": ["boundaries", "durability"],
+      "exports": ["RunEvent", "RunView", "ToolView", "applyEvent", "applyRunStatus", "emptyRun"]
+    },
+    "src/memory/embed.ts": {
+      "spec": ["memory", "budget"],
+      "architecture": ["complexity", "limitations"],
+      "exports": ["embed", "hashEmbed"]
+    },
+    "src/memory/embedding-budget.ts": {
+      "spec": ["memory", "budget"],
+      "architecture": ["complexity", "limitations"],
+      "exports": ["embeddingBudget"]
+    },
+    "src/memory/embedding-provider.ts": {
+      "spec": ["memory", "budget"],
+      "architecture": ["complexity", "limitations"],
+      "exports": ["EmbeddingBudget", "EmbeddingUsage", "embeddingProfile", "semanticEmbed"]
+    },
+    "src/memory/retrieve.ts": {
+      "spec": ["memory", "budget"],
+      "architecture": ["complexity", "limitations"],
+      "exports": ["Hit", "retrieve", "rrf"]
+    },
+    "src/reference.ts": {
+      "spec": ["case", "tools"],
+      "architecture": ["tools", "boundaries"],
+      "exports": ["Reference", "referenceOf"]
+    },
+    "src/runs/queue.ts": {
+      "spec": ["users", "autonomy"],
+      "architecture": ["durability"],
+      "exports": ["RUN_QUEUE", "boss", "enqueueRun"]
+    },
+    "src/runs/schedule.ts": {
+      "spec": ["users", "autonomy"],
+      "architecture": ["durability"],
+      "exports": ["SCHEDULE_QUEUE", "ScheduleDefinition", "dispatchScheduled"]
+    },
+    "src/runs/service.ts": {
+      "spec": ["users", "autonomy"],
+      "architecture": ["durability"],
+      "exports": [
+        "NotFoundError",
+        "RunTransaction",
+        "cancelRun",
+        "conversationMessages",
+        "conversationTurns",
+        "decideApproval",
+        "eventsSince",
+        "recentRuns",
+        "runDetail",
+        "runSpans",
+        "startRun"
+      ]
+    },
+    "src/server/http.ts": {
+      "spec": ["users", "risks"],
+      "architecture": ["boundaries", "durability"],
+      "exports": ["body", "handle", "identityOf", "json"]
+    },
+    "src/worker.ts": {
+      "spec": ["deployment", "users"],
+      "architecture": ["boundaries"],
+      "exports": []
+    }
+  }
+}
