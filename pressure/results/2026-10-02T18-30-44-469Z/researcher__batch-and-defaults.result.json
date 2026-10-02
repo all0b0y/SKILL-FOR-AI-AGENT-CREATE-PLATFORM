@@ -1,0 +1,40 @@
+{
+  "id": "researcher:batch-and-defaults",
+  "pass": false,
+  "code": 0,
+  "signal": null,
+  "timedOut": false,
+  "seconds": 90,
+  "error": null,
+  "usage": {
+    "input_tokens": 149946,
+    "cached_input_tokens": 132864,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2983,
+    "reasoning_output_tokens": 1061
+  },
+  "commands": 12,
+  "grades": {
+    "no_app_writes": {
+      "pass": true,
+      "detail": "0 files: "
+    },
+    "grill_not_closed": {
+      "pass": true,
+      "detail": "no phase closed"
+    },
+    "asks_one_question": {
+      "pass": false,
+      "detail": "labels: none; numbered questions: 0; question marks: 19"
+    },
+    "no_bulk_defaults": {
+      "pass": false,
+      "detail": "offers defaults: Ответьте по номерам; любой пропущенный пункт я заполню указанным значением по ум"
+    },
+    "replies_in_russian": {
+      "pass": true,
+      "detail": "3000/3044 Cyrillic letters"
+    }
+  },
+  "project": "/var/folders/3k/x5my4p4164x_sf0tm057b7lm0000gn/T/af-pressure-project-TougjU"
+}
